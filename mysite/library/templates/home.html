@@ -30,49 +30,73 @@
         .actions {
             margin-top: 10px;
         }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-group button:disabled {
+            background-color: #ccc;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Library</h1>
         <h2>Books</h2>
-        <ul id="book-list">
-            <!-- Example book entry -->
-            <li class="book">
-                <strong>Book ID:</strong> 1 <br>
-                <strong>Title:</strong> The Great Gatsby <br>
-                <strong>Author:</strong> F. Scott Fitzgerald <br>
-                <strong>Status:</strong> Available <br>
-                <div class="actions">
-                    <button onclick="borrowBook('1', '1')">Borrow</button>
-                    <button onclick="returnBook('1', '1')" disabled>Return</button>
-                </div>
-            </li>
-            <!-- More books will be dynamically added here -->
-        </ul>
+        <form id="add-book-form">
+            <div class="form-group">
+                <label for="book-id">Book ID:</label>
+                <input type="text" id="book-id" required>
+            </div>
+            <div class="form-group">
+                <label for="book-title">Title:</label>
+                <input type="text" id="book-title" required>
+            </div>
+            <div class="form-group">
+                <label for="book-author">Author:</label>
+                <input type="text" id="book-author" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Add Book</button>
+            </div>
+        </form>
+        <ul id="book-list"></ul>
+
         <h2>Members</h2>
-        <ul id="member-list">
-            <!-- Example member entry -->
-            <li class="member">
-                <strong>Member ID:</strong> 1 <br>
-                <strong>Name:</strong> John Doe <br>
-                <strong>Borrowed Books:</strong> None <br>
-            </li>
-            <!-- More members will be dynamically added here -->
-        </ul>
+        <form id="add-member-form">
+            <div class="form-group">
+                <label for="member-id">Member ID:</label>
+                <input type="text" id="member-id" required>
+            </div>
+            <div class="form-group">
+                <label for="member-name">Name:</label>
+                <input type="text" id="member-name" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Add Member</button>
+            </div>
+        </form>
+        <ul id="member-list"></ul>
     </div>
 
     <script>
-        // Example data for demonstration
-        const books = [
-            { book_id: '1', title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', is_borrowed: false },
-            { book_id: '2', title: 'To Kill a Mockingbird', author: 'Harper Lee', is_borrowed: false },
-        ];
-
-        const members = [
-            { member_id: '1', name: 'John Doe', borrowed_books: [] },
-            { member_id: '2', name: 'Jane Smith', borrowed_books: [] },
-        ];
+        const books = [];
+        const members = [];
 
         function loadBooks() {
             const bookList = document.getElementById('book-list');
@@ -86,8 +110,12 @@
                     <strong>Author:</strong> ${book.author} <br>
                     <strong>Status:</strong> ${book.is_borrowed ? 'Borrowed' : 'Available'} <br>
                     <div class="actions">
-                        <button onclick="borrowBook('1', '${book.book_id}')" ${book.is_borrowed ? 'disabled' : ''}>Borrow</button>
-                        <button onclick="returnBook('1', '${book.book_id}')" ${book.is_borrowed ? '' : 'disabled'}>Return</button>
+                        <select id="member-select-${book.book_id}" ${book.is_borrowed ? 'disabled' : ''}>
+                            <option value="">Select Member</option>
+                            ${members.map(member => `<option value="${member.member_id}">${member.name}</option>`).join('')}
+                        </select>
+                        <button onclick="borrowBook('${book.book_id}')" ${book.is_borrowed ? 'disabled' : ''}>Borrow</button>
+                        <button onclick="returnBook('${book.book_id}')" ${book.is_borrowed ? '' : 'disabled'}>Return</button>
                     </div>
                 `;
                 bookList.appendChild(bookItem);
@@ -109,7 +137,15 @@
             });
         }
 
-        function borrowBook(member_id, book_id) {
+        function borrowBook(book_id) {
+            const memberSelect = document.getElementById(`member-select-${book_id}`);
+            const member_id = memberSelect.value;
+
+            if (!member_id) {
+                alert("Please select a member.");
+                return;
+            }
+
             const member = members.find(m => m.member_id === member_id);
             const book = books.find(b => b.book_id === book_id);
 
@@ -121,17 +157,40 @@
             }
         }
 
-        function returnBook(member_id, book_id) {
-            const member = members.find(m => m.member_id === member_id);
+        function returnBook(book_id) {
             const book = books.find(b => b.book_id === book_id);
+            const member = members.find(m => m.borrowed_books.some(b => b.book_id === book_id));
 
-            if (book && book.is_borrowed) {
+            if (book && book.is_borrowed && member) {
                 book.is_borrowed = false;
                 member.borrowed_books = member.borrowed_books.filter(b => b.book_id !== book_id);
                 loadBooks();
                 loadMembers();
             }
         }
+
+        document.getElementById('add-book-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const bookId = document.getElementById('book-id').value;
+            const title = document.getElementById('book-title').value;
+            const author = document.getElementById('book-author').value;
+
+            books.push({ book_id: bookId, title: title, author: author, is_borrowed: false });
+            loadBooks();
+
+            document.getElementById('add-book-form').reset();
+        });
+
+        document.getElementById('add-member-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const memberId = document.getElementById('member-id').value;
+            const name = document.getElementById('member-name').value;
+
+            members.push({ member_id: memberId, name: name, borrowed_books: [] });
+            loadMembers();
+
+            document.getElementById('add-member-form').reset();
+        });
 
         window.onload = function() {
             loadBooks();
