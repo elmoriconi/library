@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .book, .member {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .actions {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Library</h1>
+        <h2>Books</h2>
+        <ul id="book-list">
+            <!-- Example book entry -->
+            <li class="book">
+                <strong>Book ID:</strong> 1 <br>
+                <strong>Title:</strong> The Great Gatsby <br>
+                <strong>Author:</strong> F. Scott Fitzgerald <br>
+                <strong>Status:</strong> Available <br>
+                <div class="actions">
+                    <button onclick="borrowBook('1', '1')">Borrow</button>
+                    <button onclick="returnBook('1', '1')" disabled>Return</button>
+                </div>
+            </li>
+            <!-- More books will be dynamically added here -->
+        </ul>
+        <h2>Members</h2>
+        <ul id="member-list">
+            <!-- Example member entry -->
+            <li class="member">
+                <strong>Member ID:</strong> 1 <br>
+                <strong>Name:</strong> John Doe <br>
+                <strong>Borrowed Books:</strong> None <br>
+            </li>
+            <!-- More members will be dynamically added here -->
+        </ul>
+    </div>
+
+    <script>
+        // Example data for demonstration
+        const books = [
+            { book_id: '1', title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', is_borrowed: false },
+            { book_id: '2', title: 'To Kill a Mockingbird', author: 'Harper Lee', is_borrowed: false },
+        ];
+
+        const members = [
+            { member_id: '1', name: 'John Doe', borrowed_books: [] },
+            { member_id: '2', name: 'Jane Smith', borrowed_books: [] },
+        ];
+
+        function loadBooks() {
+            const bookList = document.getElementById('book-list');
+            bookList.innerHTML = '';
+            books.forEach(book => {
+                const bookItem = document.createElement('li');
+                bookItem.className = 'book';
+                bookItem.innerHTML = `
+                    <strong>Book ID:</strong> ${book.book_id} <br>
+                    <strong>Title:</strong> ${book.title} <br>
+                    <strong>Author:</strong> ${book.author} <br>
+                    <strong>Status:</strong> ${book.is_borrowed ? 'Borrowed' : 'Available'} <br>
+                    <div class="actions">
+                        <button onclick="borrowBook('1', '${book.book_id}')" ${book.is_borrowed ? 'disabled' : ''}>Borrow</button>
+                        <button onclick="returnBook('1', '${book.book_id}')" ${book.is_borrowed ? '' : 'disabled'}>Return</button>
+                    </div>
+                `;
+                bookList.appendChild(bookItem);
+            });
+        }
+
+        function loadMembers() {
+            const memberList = document.getElementById('member-list');
+            memberList.innerHTML = '';
+            members.forEach(member => {
+                const memberItem = document.createElement('li');
+                memberItem.className = 'member';
+                memberItem.innerHTML = `
+                    <strong>Member ID:</strong> ${member.member_id} <br>
+                    <strong>Name:</strong> ${member.name} <br>
+                    <strong>Borrowed Books:</strong> ${member.borrowed_books.length > 0 ? member.borrowed_books.map(book => book.title).join(', ') : 'None'} <br>
+                `;
+                memberList.appendChild(memberItem);
+            });
+        }
+
+        function borrowBook(member_id, book_id) {
+            const member = members.find(m => m.member_id === member_id);
+            const book = books.find(b => b.book_id === book_id);
+
+            if (book && !book.is_borrowed) {
+                book.is_borrowed = true;
+                member.borrowed_books.push(book);
+                loadBooks();
+                loadMembers();
+            }
+        }
+
+        function returnBook(member_id, book_id) {
+            const member = members.find(m => m.member_id === member_id);
+            const book = books.find(b => b.book_id === book_id);
+
+            if (book && book.is_borrowed) {
+                book.is_borrowed = false;
+                member.borrowed_books = member.borrowed_books.filter(b => b.book_id !== book_id);
+                loadBooks();
+                loadMembers();
+            }
+        }
+
+        window.onload = function() {
+            loadBooks();
+            loadMembers();
+        };
+    </script>
+</body>
+</html>
