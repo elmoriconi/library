@@ -1,0 +1,42 @@
+<!-- templates/visualizza.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elenco dei Libri</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Elenco dei Libri</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titolo</th>
+                <th>Autore</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for libro in libri %}
+                <tr>
+                    <td>{{ libro[0] }}</td>
+                    <td>{{ libro[1] }}</td>
+                    <td>{{ libro[2] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
