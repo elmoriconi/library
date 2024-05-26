@@ -52,31 +52,60 @@
         .form-group button:disabled {
             background-color: #ccc;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
-    <form method="post" action="/inserimento"></form>
     <div class="container">
         <h1>Library</h1>
         <h2>Books</h2>
-        <form id="add-book-form">
+        <form method="post" action="/inserimento">
             <div class="form-group">
                 <label for="book-id">Book ID:</label>
-                <input type="text" id="book-id" required>
+                <input type="text" name="book-id" required>
             </div>
             <div class="form-group">
                 <label for="book-title">Title:</label>
-                <input type="text" id="book-title" required>
+                <input type="text" name="book-title" required>
             </div>
             <div class="form-group">
                 <label for="book-author">Author:</label>
-                <input type="text" id="book-author" required>
+                <input type="text" name="book-author" required>
             </div>
             <div class="form-group">
                 <button type="submit">Add Book</button>
             </div>
         </form>
-        <a href="/visualizza">Visualizza Libri</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titolo</th>
+                    <th>Autore</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for libro in libri %}
+                    <tr>
+                        <td>{{ libro[0] }}</td>
+                        <td>{{ libro[1] }}</td>
+                        <td>{{ libro[2] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/visualizza">Aggiorna la lista dei libri</a>
         <ul id="book-list"></ul>
 
         <h2>Members</h2>

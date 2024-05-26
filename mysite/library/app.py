@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, g
+from flask import Flask, request, render_template, g, redirect
 import sqlite3
 
 DATABASE = 'database.db'
@@ -62,10 +62,8 @@ def inserimento():
     cursor = db.cursor()
     cursor.execute("INSERT INTO books (book_id, title, author) VALUES (?, ?, ?)", (id_book, titolo, autore))
     db.commit()
-
     db.close()
-    
-    return "Dati inseriti correttamente!"
+    return redirect('/')
 
 @app.route('/visualizza')
 def visualizza():
@@ -73,8 +71,7 @@ def visualizza():
     cursor = db.cursor()
     cursor.execute("SELECT book_id, title, author FROM books")
     libri = cursor.fetchall()
-    return render_template('visualizza.html', libri=libri)
+    return render_template('home.html', libri=libri)
+    
 if __name__ == '__main__':
-    with app.app_context():
-        init_db()
     app.run(debug=True)
