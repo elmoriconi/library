@@ -74,4 +74,5 @@ def visualizza():
     return render_template('home.html', libri=libri)
     
 if __name__ == '__main__':
+
     app.run(debug=True)
