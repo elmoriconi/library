@@ -7,6 +7,7 @@ class Book(models.Model):
         self.title: str = title
         self.author: str = author
         self.is_borrowed: bool = False
+        self.is_expired: bool = False
         
     def __str__(self):
         return f"{self.book_id}, {self.title}, {self.author}, {self.is_borrowed}"
