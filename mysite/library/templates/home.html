@@ -140,6 +140,7 @@
                     <strong>Title:</strong> ${book.title} <br>
                     <strong>Author:</strong> ${book.author} <br>
                     <strong>Status:</strong> ${book.is_borrowed ? 'Borrowed' : 'Available'} <br>
+                    <strong>Expired:</strong> ${book.is_expired ? 'Expired' : 'Not Expired'} <br>
                     <div class="actions">
                         <select id="member-select-${book.book_id}" ${book.is_borrowed ? 'disabled' : ''}>
                             <option value="">Select Member</option>
