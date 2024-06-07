@@ -31,6 +31,7 @@ def init_db():
                 title TEXT NOT NULL,
                 author TEXT NOT NULL,
                 is_borrowed BOOLEAN NOT NULL DEFAULT FALSE
+                is_expired BOOLEAN NOT NULL DEFAULT FALSE
             );
 
             CREATE TABLE members (
