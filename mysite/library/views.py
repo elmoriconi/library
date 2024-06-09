@@ -22,3 +22,7 @@ def inserimento(request):
         return redirect('/')
     
     return render(request, 'inserimento.html')
+
+def visualizza(request):
+    libri = Book.objects.all()
+    return render(request, 'visualizza.html', {'libri': libri})

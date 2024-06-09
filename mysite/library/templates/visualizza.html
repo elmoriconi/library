@@ -31,9 +31,9 @@
         <tbody>
             {% for libro in libri %}
                 <tr>
-                    <td>{{ libro[0] }}</td>
-                    <td>{{ libro[1] }}</td>
-                    <td>{{ libro[2] }}</td>
+                    <td>{{ libro.book_id }}</td>
+                    <td>{{ libro.titolo }}</td>
+                    <td>{{ libro.autore }}</td>
                 </tr>
             {% endfor %}
         </tbody>

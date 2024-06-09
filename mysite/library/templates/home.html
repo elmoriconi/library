@@ -88,25 +88,8 @@
                 <button type="submit">Add Book</button>
             </div>
         </form>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Titolo</th>
-                    <th>Autore</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for libro in libri %}
-                    <tr>
-                        <td>{{ libro.id }}</td>
-                        <td>{{ libro.titolo }}</td>
-                        <td>{{ libro.autore }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="/visualizza">Aggiorna la lista dei libri</a>
+        
+        <a href="/visualizza/visualizza.html">visualizza libri</a>
         <ul id="book-list"></ul>
 
         <h2>Members</h2>
