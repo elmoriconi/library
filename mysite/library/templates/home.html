@@ -70,7 +70,8 @@
     <div class="container">
         <h1>Library</h1>
         <h2>Books</h2>
-        <form method="post" action="/inserimento">
+        <form method="post" action="/inserimento/">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="book-id">Book ID:</label>
                 <input type="text" name="book-id" required>
@@ -98,9 +99,9 @@
             <tbody>
                 {% for libro in libri %}
                     <tr>
-                        <td>{{ libro[0] }}</td>
-                        <td>{{ libro[1] }}</td>
-                        <td>{{ libro[2] }}</td>
+                        <td>{{ libro.id }}</td>
+                        <td>{{ libro.titolo }}</td>
+                        <td>{{ libro.autore }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -2,5 +2,6 @@ from django.urls import *
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path('inserimento/', views.inserimento, name='inserimento'),
+    path("", views.index, name="index")
 ]

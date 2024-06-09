@@ -26,6 +26,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path("library/", include("library.urls")),
+    path('inserimento/', include('library.urls')),
     path("admin/", admin.site.urls),
 ]
 
