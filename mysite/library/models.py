@@ -1,9 +1,9 @@
 from django.db import models
 
 class Book(models.Model):
-    book_id = models.CharField(max_length=100)
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
+    book_id = models.CharField(max_length=100, default=None)
+    title = models.CharField(max_length=100, default = None)
+    author = models.CharField(max_length=100, default = None)
     is_borrowed = models.BooleanField(default=False)
     is_expired = models.BooleanField(default=False)
 
@@ -11,9 +11,9 @@ class Book(models.Model):
         return f"{self.book_id}, {self.title}, {self.author}, {self.is_borrowed}"
 
 class Member(models.Model):
-    member_id = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    borrowed_books = models.ManyToManyField(Book)
+    member_id = models.CharField(max_length=100, default = None)
+    name = models.CharField(max_length=100, default = None)
+    borrowed_books = models.ManyToManyField(Book, default = None)
 
     def __str__(self):
         return f"{self.member_id}, {self.name}, {self.borrowed_books}"
