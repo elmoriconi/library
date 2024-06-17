@@ -16,7 +16,7 @@ def inserimento(request):
         autore = request.POST['book-author']
         
         # Inserimento nel database
-        nuovo_libro = Book(book_id=id_book, titolo=titolo, autore=autore)
+        nuovo_libro = Book(book_id=id_book, title=titolo, author=autore)
         nuovo_libro.save()
         
         return redirect('/')

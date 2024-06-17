@@ -7,6 +7,13 @@ class Book(models.Model):
     is_borrowed = models.BooleanField(default=False)
     is_expired = models.BooleanField(default=False)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['book_id'], name='uniwue_book_id'
+            )
+        ]
+
     def __str__(self):
         return f"{self.book_id}, {self.title}, {self.author}, {self.is_borrowed}"
 
@@ -21,13 +28,20 @@ class Member(models.Model):
 class Library(models.Model):
     books = models.ManyToManyField(Book)
     members = models.ManyToManyField(Member)
+    nome = models.CharField(max_length=100, primary_key=True)
+
+    def add_library(self, name):
+        library = Library.objects.create(name)
+        library.save()
 
     def add_book(self, book_id, title, author):
         book = Book.objects.create(book_id=book_id, title=title, author=author)
+        book.save()
         self.books.add(book)
 
     def register_member(self, member_id, name):
         member = Member.objects.create(member_id=member_id, name=name)
+        member.save()
         self.members.add(member)
 
     def borrow_book(self, member_id, book_id):
