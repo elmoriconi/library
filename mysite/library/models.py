@@ -4,15 +4,22 @@ class Book(models.Model):
     book_id = models.CharField(max_length=100, default=None)
     title = models.CharField(max_length=100, default = None)
     author = models.CharField(max_length=100, default = None)
+    library = default = None
     is_borrowed = models.BooleanField(default=False)
     is_expired = models.BooleanField(default=False)
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=['book_id'], name='uniwue_book_id'
+                fields=['book_id'], name='unique_book_id'
             )
         ]
+
+    def setLibrary(self, library):
+        self.library = library
+
+    def getLibrary(self):
+        return self.library
 
     def __str__(self):
         return f"{self.book_id}, {self.title}, {self.author}, {self.is_borrowed}"
@@ -34,8 +41,9 @@ class Library(models.Model):
         library = Library.objects.create(name)
         library.save()
 
-    def add_book(self, book_id, title, author):
+    def add_book(self, book_id, title, author, library):
         book = Book.objects.create(book_id=book_id, title=title, author=author)
+        self.library = library
         book.save()
         self.books.add(book)
 

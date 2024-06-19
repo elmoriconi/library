@@ -69,8 +69,24 @@
 <body>
     <div class="container">
         <h1>Library</h1>
+        <form method='post' action='create_library/'>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="createlibrary">Create a library:</label>
+                <br>
+                <input type="text" name="libraryname" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Add Library</button>
+            </div>
+        </form>
         <h2>Books</h2>
         <form method="post" action="/inserimento/">
+            <label for="library">Choose a library:</label>
+            <br>
+            <select name="library" id="library">
+                <option value="Prima">Prima</option>
+            </select>
             {% csrf_token %}
             <div class="form-group">
                 <label for="book-id">Book ID:</label>
@@ -88,30 +104,19 @@
                 <button type="submit">Add Book</button>
             </div>
         </form>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Titolo</th>
-                    <th>Autore</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for libro in libri %}
-                    <tr>
-                        <td>{{ libro.book_id }}</td>
-                        <td>{{ libro.titolo }}</td>
-                        <td>{{ libro.autore }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
         
         <a href="/visualizza/">visualizza libri</a>
         <ul id="book-list"></ul>
 
         <h2>Members</h2>
+        <form>
+            <label for="library">Choose a library:</label>
+            <br>
+            <select name="library" id="library">
+                <option value="Prima">Prima</option>
+                <option value="Seconda">Seconda</option>
+            </select>
+        </form>
         <form id="add-member-form">
             <div class="form-group">
                 <label for="member-id">Member ID:</label>

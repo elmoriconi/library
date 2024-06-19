@@ -8,6 +8,14 @@ def index(request):
     
     return render(request, 'home.html')
 
+def create_library(request):
+    if request.method == 'POST':
+        library = request.POST['libraryname']
+        new_library = Library(library)
+        new_library.save()
+        return redirect('/')
+    return render(request, 'create_library.html')
+
 @csrf_exempt
 def inserimento(request):
     if request.method == 'POST':
