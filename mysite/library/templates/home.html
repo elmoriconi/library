@@ -84,7 +84,7 @@
         <form method="post" action="/inserimento/">
             <label for="library">Choose a library:</label>
             <br>
-            <select name="library" id="library">
+            <select name="library" id="library" required>
                 <option value="Prima">Prima</option>
             </select>
             {% csrf_token %}
