@@ -22,9 +22,9 @@ def inserimento(request):
         id_book = request.POST['book-id']
         titolo = request.POST['book-title']
         autore = request.POST['book-author']
-        
+        biblioteca = request.POST['library']
         # Inserimento nel database
-        nuovo_libro = Book(book_id=id_book, title=titolo, author=autore)
+        nuovo_libro = Book(book_id=id_book, title=titolo, author=autore, library=biblioteca)
         nuovo_libro.save()
         
         return redirect('/')
@@ -38,3 +38,7 @@ def visualizza(request):
 def visualizza_biblioteche(request):
     biblioteche = Library.objects.all()
     return render(request, 'visualizza_biblioteche.html', {'biblioteche': biblioteche})
+
+def visualizza_membri(request):
+    membri = Member.objects.all()
+    return render(request, 'visualizza_membri.html', {'membri': membri})

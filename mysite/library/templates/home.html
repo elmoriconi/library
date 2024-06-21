@@ -116,7 +116,9 @@
             <label for="library">Choose a library:</label>
             <br>
             <select name="library" id="library">
-                <option value="Prima">Prima</option>
+                {% for biblioteca in biblioteche %}
+                <option value="biblioteca">{{ biblioteca.name }}</option>
+                {% endfor %}
                 <option value="Seconda">Seconda</option>
             </select>
         </form>
@@ -133,6 +135,8 @@
                 <button type="submit">Add Member</button>
             </div>
         </form>
+
+        <a href="/visualizza_membri/">visualizza libri</a>
         <ul id="member-list"></ul>
     </div>
 
