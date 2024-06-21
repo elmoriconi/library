@@ -33,9 +33,9 @@ class Member(models.Model):
         return f"{self.member_id}, {self.name}, {self.borrowed_books}"
 
 class Library(models.Model):
+    name = models.CharField(max_length=100, default = None, null = True)
     books = models.ManyToManyField(Book)
     members = models.ManyToManyField(Member)
-    nome = models.CharField(max_length=100, primary_key=True)
 
     def add_library(self, name):
         library = Library.objects.create(name)

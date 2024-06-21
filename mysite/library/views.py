@@ -11,7 +11,7 @@ def index(request):
 def create_library(request):
     if request.method == 'POST':
         library = request.POST['libraryname']
-        new_library = Library(library)
+        new_library = Library(name=library)
         new_library.save()
         return redirect('/')
     return render(request, 'create_library.html')
