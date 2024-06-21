@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elenco dei Libri</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Elenco dei Libri</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Biblioteca</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for biblioteca in biblioteche %}
+                <tr>
+                    <td>{{ biblioteca.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </body>
+</html>

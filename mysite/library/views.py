@@ -34,3 +34,7 @@ def inserimento(request):
 def visualizza(request):
     libri = Book.objects.all()
     return render(request, 'visualizza.html', {'libri': libri})
+
+def visualizza_biblioteche(request):
+    biblioteche = Library.objects.all()
+    return render(request, 'visualizza_biblioteche.html', {'bibliteche': biblioteche})
