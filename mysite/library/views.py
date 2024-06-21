@@ -5,8 +5,8 @@ from django.http import HttpResponse
 
 
 def index(request):
-    
-    return render(request, 'home.html')
+    biblioteche = Library.objects.all()
+    return render(request, 'home.html', {'biblioteche': biblioteche})
 
 def create_library(request):
     if request.method == 'POST':

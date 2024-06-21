@@ -86,7 +86,8 @@
             <label for="library">Choose a library:</label>
             <br>
             <select name="library" id="library" required>
-                <option value="Prima">Prima</option>
+                {% for biblioteca in biblioteche %}
+                <option value="biblioteca">{{ biblioteca.name }}</option>
             </select>
             {% csrf_token %}
             <div class="form-group">
