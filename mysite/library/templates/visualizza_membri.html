@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Elenco delle Biblioteche</title>
+    <title>Elenco dei Membri</title>
     <style>
         table {
             width: 100%;
@@ -18,19 +18,24 @@
     </style>
 </head>
 <body>
-    <h1>Elenco delle Biblioteche</h1>
+    <h1>Elenco dei Membri</h1>
     <table>
         <thead>
             <tr>
-                <th>Biblioteche</th>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>In Prestito</th>
             </tr>
         </thead>
         <tbody>
-            {% for biblioteca in biblioteche %}
+            <!--{% for libro in libri %}
                 <tr>
-                    <td>{{ biblioteca.name }}</td>
+                    <td>{{ libro.book_id }}</td>
+                    <td>{{ libro.title }}</td>
+                    <td>{{ libro.author }}</td>
+                    <td>{{ libro.library }}</td>
                 </tr>
-            {% endfor %}
+            {% endfor %}-->
         </tbody>
     </table>
     </body>

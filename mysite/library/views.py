@@ -37,4 +37,4 @@ def visualizza(request):
 
 def visualizza_biblioteche(request):
     biblioteche = Library.objects.all()
-    return render(request, 'visualizza_biblioteche.html', {'bibliteche': biblioteche})
+    return render(request, 'visualizza_biblioteche.html', {'biblioteche': biblioteche})
