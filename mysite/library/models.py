@@ -4,7 +4,7 @@ class Book(models.Model):
     book_id = models.CharField(max_length=100, default=None)
     title = models.CharField(max_length=100, default = None)
     author = models.CharField(max_length=100, default = None)
-    library = default = None
+    owned_by = models.CharField(max_length=100, default=None)
     is_borrowed = models.BooleanField(default=False)
     is_expired = models.BooleanField(default=False)
 

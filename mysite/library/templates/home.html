@@ -117,9 +117,8 @@
             <br>
             <select name="library" id="library">
                 {% for biblioteca in biblioteche %}
-                <option value="biblioteca">{{ biblioteca.name }}</option>
+                <option value={{ biblioteca.name }}>{{ biblioteca.name }}</option>
                 {% endfor %}
-                <option value="Seconda">Seconda</option>
             </select>
         </form>
         <form id="add-member-form">
