@@ -112,7 +112,7 @@
         <ul id="book-list"></ul>
 
         <h2>Members</h2>
-        <form id="add-member-form">
+        <form method="post" action="/inserimento_membri/">
             <label for="library">Choose a library:</label>
             <br>
             <select name="library" id="library">
@@ -120,6 +120,7 @@
                 <option value={{ biblioteca.name }}>{{ biblioteca.name }}</option>
                 {% endfor %}
             </select>
+            {% csrf_token %}
             <div class="form-group">
                 <label for="member-id">Member ID:</label>
                 <input type="text" id="member-id" required>

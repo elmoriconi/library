@@ -27,6 +27,7 @@ def inserimento(request):
         nuovo_libro.save()    
     return redirect('/')
 
+@csrf_exempt
 def inserimento_membri(request):
     if request.method == 'POST':
         id_member = request.POST['member-id']
