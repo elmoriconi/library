@@ -87,7 +87,7 @@
             <br>
             <select name="library" id="library" required>
                 {% for biblioteca in biblioteche %}
-                <option value="biblioteca">{{ biblioteca.name }}</option>
+                <option value={{ biblioteca.name }}>{{ biblioteca.name }}</option>
                 {% endfor %}
             </select>
             {% csrf_token %}
