@@ -27,6 +27,7 @@ class Book(models.Model):
 class Member(models.Model):
     member_id = models.CharField(max_length=100, default = None)
     name = models.CharField(max_length=100, default = None)
+    assigned = models.CharField(max_length=100, default = None)
     borrowed_books = models.ManyToManyField(Book, default = None)
 
     def __str__(self):

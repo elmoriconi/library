@@ -7,5 +7,6 @@ urlpatterns = [
     path('visualizza/', views.visualizza, name='visualizza'),
     path('create_library/', views.create_library, name='create_library' ),
     path('visualizza_biblioteche/', views.visualizza_biblioteche, name='visualizza_biblioteche'),
-    path('visualizza_membri/', views.visualizza_membri, name='visualizza_membri')
+    path('visualizza_membri/', views.visualizza_membri, name='visualizza_membri'),
+    path('inserimento_membri/', views.inserimento_membri, name='inserimento_membri')
 ]

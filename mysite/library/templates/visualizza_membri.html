@@ -25,17 +25,18 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>In Prestito</th>
+                <th>biblioteca</th>
             </tr>
         </thead>
         <tbody>
-            <!--{% for libro in libri %}
+            {% for membro in membru %}
                 <tr>
-                    <td>{{ libro.book_id }}</td>
-                    <td>{{ libro.title }}</td>
-                    <td>{{ libro.author }}</td>
-                    <td>{{ libro.library }}</td>
+                    <td>{{ membro.member_id }}</td>
+                    <td>{{ membro.name }}</td>
+                    <td>{{ membro.borrowed_books }}</td>
+                    <td>{{ membro.assigned }}</td>
                 </tr>
-            {% endfor %}-->
+            {% endfor %}
         </tbody>
     </table>
     </body>

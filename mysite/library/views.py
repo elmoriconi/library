@@ -23,13 +23,18 @@ def inserimento(request):
         titolo = request.POST['book-title']
         autore = request.POST['book-author']
         biblioteca = request.POST['library']
-        # Inserimento nel database
         nuovo_libro = Book(book_id=id_book, title=titolo, author=autore, owned_by=biblioteca)
-        nuovo_libro.save()
-        
-        return redirect('/')
-    
-    return render(request, 'inserimento.html')
+        nuovo_libro.save()    
+    return render('/')
+
+def inserimento_membri(request):
+    if request.method == 'POST':
+        id_member = request.POST['member-id']
+        nome = request.POST['member-name']
+        biblioteca = request.POST['library']
+        nuovo_membro = Member(member_id=id_member, name=nome, assigned=biblioteca)
+        nuovo_membro.save()
+    return redirect('/') 
 
 def visualizza(request):
     libri = Book.objects.all()

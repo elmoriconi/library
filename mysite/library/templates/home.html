@@ -112,7 +112,7 @@
         <ul id="book-list"></ul>
 
         <h2>Members</h2>
-        <form>
+        <form id="add-member-form">
             <label for="library">Choose a library:</label>
             <br>
             <select name="library" id="library">
@@ -120,8 +120,6 @@
                 <option value={{ biblioteca.name }}>{{ biblioteca.name }}</option>
                 {% endfor %}
             </select>
-        </form>
-        <form id="add-member-form">
             <div class="form-group">
                 <label for="member-id">Member ID:</label>
                 <input type="text" id="member-id" required>
@@ -135,7 +133,7 @@
             </div>
         </form>
 
-        <a href="/visualizza_membri/">visualizza libri</a>
+        <a href="/visualizza_membri/">visualizza membri</a>
         <ul id="member-list"></ul>
     </div>
 
