@@ -25,7 +25,7 @@ def inserimento(request):
         biblioteca = request.POST['library']
         nuovo_libro = Book(book_id=id_book, title=titolo, author=autore, owned_by=biblioteca)
         nuovo_libro.save()    
-    return render('/')
+    return redirect('/')
 
 def inserimento_membri(request):
     if request.method == 'POST':
