@@ -48,3 +48,6 @@ def visualizza_biblioteche(request):
 def visualizza_membri(request):
     membri = Member.objects.all()
     return render(request, 'visualizza_membri.html', {'membri': membri})
+
+def borrow_book(request):
+    pass

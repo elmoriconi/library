@@ -27,6 +27,7 @@
                 <th>Titolo</th>
                 <th>Autore</th>
                 <th>Biblioteca</th>
+                <th>In Prestito</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
                     <td>{{ libro.title }}</td>
                     <td>{{ libro.author }}</td>
                     <td>{{ libro.owned_by }}</td>
+                    <td>{{ libro.is_borrowed }}
                 </tr>
             {% endfor %}
         </tbody>
