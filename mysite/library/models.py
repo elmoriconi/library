@@ -30,6 +30,13 @@ class Member(models.Model):
     assigned = models.CharField(max_length=100, default = None)
     borrowed_books = models.ManyToManyField(Book, default = None)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['member_id'], name='unique_member_id'
+            )
+        ]
+
     def __str__(self):
         return f"{self.member_id}, {self.name}, {self.borrowed_books}"
 
