@@ -6,7 +6,9 @@ from django.http import HttpResponse
 
 def index(request):
     biblioteche = Library.objects.all()
-    return render(request, 'home.html', {'biblioteche': biblioteche})
+    libri = Book.objects.all()
+    membri = Member.objects.all()
+    return render(request, 'home.html', {'biblioteche': biblioteche, 'libri': libri, 'membri': membri})
 
 def create_library(request):
     if request.method == 'POST':

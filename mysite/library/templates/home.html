@@ -150,7 +150,7 @@
                 <br>
                 <label for="book_id">Choose a book:</label>
                 <select name="book" id="book" required>
-                    {% for libro in membro.assigned %}
+                    {% for libro in libri %}
                     <option value={{ libro.book_id }}>{{ libro.book_id }}</option>
                     {% endfor %}
                 </select>
