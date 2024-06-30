@@ -73,3 +73,9 @@ class Library(models.Model):
     def get_borrowed_books(self, member_id):
         member = Member.objects.get(member_id=member_id)
         return member.borrowed_books.all()
+    
+    @staticmethod
+    def get_library_of_member(member_id):
+        member = Member.objects.get(member_id=member_id)
+        library = Library.objects.filter(members=member).first()
+        return library

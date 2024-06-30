@@ -139,11 +139,11 @@
         <ul id="member-list"></ul>
 
         <h3>Borrow book</h3>
-            <form method="post" action="/borrow_book/">
-                <label for="member_id">Choose a member:</label>
+            <form method="post" action="/form_borrow/">
+                <label for="member">Choose a member:</label>
                 <select name="member" id="member" required>
                     {% for membro in membri %}
-                    <option value={{ membro.member_id }}>{{ membro.member_id }}</option>
+                    <option value={{ membro }}>{{ membro }}</option>
                     {% endfor %}
                 </select>
                 {% csrf_token %}
@@ -151,7 +151,7 @@
                 <label for="book_id">Choose a book:</label>
                 <select name="book" id="book" required>
                     {% for libro in libri %}
-                    <option value={{ libro.book_id }}>{{ libro.book_id }}</option>
+                    <option value={{ libro.book_id }}>{{ libro.title }}</option>
                     {% endfor %}
                 </select>
                 {% csrf_token %}
