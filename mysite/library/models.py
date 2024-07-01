@@ -55,8 +55,9 @@ class Library(models.Model):
         book.save()
         self.books.add(book)
 
-    def register_member(self, member_id, name):
+    def register_member(self, member_id, name, library):
         member = Member.objects.create(member_id=member_id, name=name)
+        self.library = library
         member.save()
         self.members.add(member)
 
