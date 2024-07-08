@@ -13,7 +13,7 @@ def index(request):
 def create_library(request):
     if request.method == 'POST':
         library = request.POST['libraryname']
-        new_library = Library(name=library)
+        new_library = Library.objects.create(name=library)
         new_library.save()
         return redirect('/')
     return render(request, 'create_library.html')
@@ -25,8 +25,9 @@ def inserimento(request):
         titolo = request.POST['book-title']
         autore = request.POST['book-author']
         biblioteca = request.POST['library']
-        nuovo_libro = Book(book_id=id_book, title=titolo, author=autore, owned_by=biblioteca)
-        nuovo_libro.save()    
+        biblioteca_agg = Library.objects.get(name=biblioteca)
+        nuovo_libro = Book.objects.create(book_id=id_book, title=titolo, author=autore, owned_by=biblioteca_agg)
+        nuovo_libro.save()  
     return redirect('/')
 
 @csrf_exempt
@@ -35,7 +36,8 @@ def inserimento_membri(request):
         id_member = request.POST['member-id']
         nome = request.POST['member-name']
         biblioteca = request.POST['library']
-        nuovo_membro = Member(member_id=id_member, name=nome, assigned=biblioteca)
+        biblioteca_agg = Library.objects.get(name=biblioteca)
+        nuovo_membro = Member.objects.create(member_id=id_member, name=nome, assigned=biblioteca_agg)
         nuovo_membro.save()
     return redirect('/') 
 
