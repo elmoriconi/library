@@ -56,12 +56,10 @@ def visualizza_membri(request):
 def form_borrow(request):
     if request.method == 'POST':
         member = request.POST['member']
-        member = member.replace(",","")
         member_istance = Member.objects.get(member_id=member)
-        biblioteca = Library.objects.filter(members=member).first() #non ritorna un cazzo non so il perchè
-        print(f"{member_istance} {member_istance.assigned}")
-        print(biblioteca)
-    return render(request, 'form_borrow.html', {'biblioteca': biblioteca, 'member': member_istance})
+        biblioteca = Library.objects.get(name=member_istance.assigned.name)
+        libri_biblioteca = Book.objects.filter(owned_by=biblioteca.name)
+    return render(request, 'form_borrow.html', {'library': biblioteca, 'member': member_istance, 'books': libri_biblioteca})
 
 
 def borrow_book(request):

@@ -68,6 +68,57 @@
     </head>
     <body>
         <h2>Elenco libri nella biblioteca</h2>
-
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titolo</th>
+                    <th>Autore</th>
+                    <th>Biblioteca</th>
+                    <th>In Prestito</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.book_id }}</td>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.owned_by }}</td>
+                        <td>{{ book.is_borrowed }}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h1>Elenco dei Membri</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>In Prestito</th>
+                    <th>biblioteca</th>
+                </tr>
+            </thead>
+            <tbody>
+                <td>{{ member.member_id }}</td>
+                <td>{{ member.name }}</td>
+                <td>{{ member.borrowed_books }}</td>
+                <td>{{ member.assigned }}</td>
+            </tbody>
+        </table>
+        <h1>Elenco delle Biblioteche</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Biblioteche</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ library.name }}</td>
+            </tr>
+        </tbody>
+    </table>
     </body>
 </html>
