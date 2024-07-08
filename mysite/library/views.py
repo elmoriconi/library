@@ -58,7 +58,7 @@ def form_borrow(request):
         member = request.POST['member']
         member_istance = Member.objects.get(member_id=member)
         biblioteca = Library.objects.get(name=member_istance.assigned.name)
-        libri_biblioteca = Book.objects.filter(owned_by=biblioteca.name)
+        libri_biblioteca = Book.objects.filter(owned_by=biblioteca.name, is_borrowed=False)
     return render(request, 'form_borrow.html', {'library': biblioteca, 'member': member_istance, 'books': libri_biblioteca})
 
 

@@ -67,29 +67,37 @@
         </style>
     </head>
     <body>
-        <h2>Elenco libri nella biblioteca</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Titolo</th>
-                    <th>Autore</th>
-                    <th>Biblioteca</th>
-                    <th>In Prestito</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for book in books %}
+        <h2>Elenco libri nella biblioteca che {{ member.name }} può prendere alla biblioteca {{ library.name }}</h2>
+        <form>
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ book.book_id }}</td>
-                        <td>{{ book.title }}</td>
-                        <td>{{ book.author }}</td>
-                        <td>{{ book.owned_by }}</td>
-                        <td>{{ book.is_borrowed }}
+                        <th>ID</th>
+                        <th>Titolo</th>
+                        <th>Autore</th>
+                        <th>Biblioteca</th>
+                        <th>In Prestito</th>
+                        <th>Da prendere</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td>{{ book.book_id }}</td>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.owned_by }}</td>
+                            <td>{{ book.is_borrowed }}</td>
+                            <td><input type="radio" id="prestito" name="prestito" value={{ book.book_id }}></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% csrf_token %}
+            <div class="form-group">
+                <button type="submit">Borrow Book</button>
+            </div>
+        </form>
         <h1>Elenco dei Membri</h1>
         <table>
             <thead>
