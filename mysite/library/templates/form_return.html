@@ -67,15 +67,15 @@
         </style>
     </head>
     <body>
-        <h2>Elenco libri che {{ member.name }} può prendere alla biblioteca {{ library.name }}</h2>
-        <form method="post" action="/borrow_book/">
+        <h2>Elenco libri che {{ member.name }} può restituire alla biblioteca {{ library.name }}</h2>
+        <form method="post" action="/return_book/">
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Titolo</th>
                         <th>Autore</th>
-                        <th>Da prendere</th>
+                        <th>Da restituire</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,7 +96,7 @@
                         <td colspan="2">
                             {% csrf_token %}
                             <div class="form-group">
-                                <button type="submit">Borrow Book</button>
+                                <button type="submit">Return Book</button>
                             </div>
                         </td>
                     </tr>

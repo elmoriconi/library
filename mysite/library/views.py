@@ -71,5 +71,18 @@ def borrow_book(request):
         book_istance.borrow(member_istance)
     return index(request)
 
+def form_return(request):
+    if request.method == 'POST':
+        member = request.POST['member']
+        member_istance = Member.objects.get(member_id=member)
+        biblioteca = Library.objects.get(name=member_istance.assigned.name)
+        libri_biblioteca = Book.objects.filter(owned_by=biblioteca.name, is_borrowed=True, borrowed_by=member_istance)
+    return render(request, 'form_return.html', {'library': biblioteca, 'member': member_istance, 'books': libri_biblioteca})
+
+
 def return_book(request):
-    pass
+    if request.method == 'POST':
+        book = request.POST['prestito']
+        book_istance = Book.objects.get(book_id=book)
+        book_istance.giveBack()
+    return index(request)

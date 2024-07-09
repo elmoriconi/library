@@ -10,5 +10,7 @@ urlpatterns = [
     path('visualizza_membri/', views.visualizza_membri, name='visualizza_membri'),
     path('inserimento_membri/', views.inserimento_membri, name='inserimento_membri'),
     path('form_borrow/', views.form_borrow, name='form_borrow'),
-    path('borrow_book/', views.borrow_book, name='borrow_book')
+    path('borrow_book/', views.borrow_book, name='borrow_book'),
+    path('form_return/', views.form_return, name='form_return'),
+    path('return_book/', views.return_book, name='return_book')
 ]

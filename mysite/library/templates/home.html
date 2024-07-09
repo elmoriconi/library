@@ -154,6 +154,19 @@
                     <button type="submit">Borrow Book</button>
                 </div>
             </form>
+        <h3>Return book</h3>
+            <form method="post" action="/form_return/">
+                <label for="member">Choose a member:</label>
+                <select name="member" id="member" required>
+                    {% for membro in membri %}
+                    <option value={{ membro.member_id }}>{{ membro }}</option>
+                    {% endfor %}
+                </select>
+                {% csrf_token %}
+                <div class="form-group">
+                    <button type="submit">Return Book</button>
+                </div>
+            </form>
     </div>
 
     <script>
