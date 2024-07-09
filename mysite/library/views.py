@@ -63,4 +63,13 @@ def form_borrow(request):
 
 
 def borrow_book(request):
+    if request.method == 'POST':
+        book = request.POST['prestito']
+        member = request.POST['member']
+        book_istance = Book.objects.get(book_id=book)
+        member_istance = Member.objects.get(member_id=member)
+        book_istance.borrow(member_istance)
+    return index(request)
+
+def return_book(request):
     pass

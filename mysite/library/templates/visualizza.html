@@ -28,6 +28,7 @@
                 <th>Autore</th>
                 <th>Biblioteca</th>
                 <th>In Prestito</th>
+                <th>Proprietario attuale</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +38,8 @@
                     <td>{{ libro.title }}</td>
                     <td>{{ libro.author }}</td>
                     <td>{{ libro.owned_by }}</td>
-                    <td>{{ libro.is_borrowed }}
+                    <td>{{ libro.is_borrowed }}</td>
+                    <td>{{ libro.borrowed_by }}</td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -150,14 +150,6 @@
                     {% endfor %}
                 </select>
                 {% csrf_token %}
-                <br>
-                <label for="book_id">Choose a book:</label>
-                <select name="book" id="book" required>
-                    {% for libro in libri %}
-                    <option value={{ libro.book_id }}>{{ libro.title }}</option>
-                    {% endfor %}
-                </select>
-                {% csrf_token %}
                 <div class="form-group">
                     <button type="submit">Borrow Book</button>
                 </div>

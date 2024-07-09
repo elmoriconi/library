@@ -68,15 +68,13 @@
     </head>
     <body>
         <h2>Elenco libri nella biblioteca che {{ member.name }} può prendere alla biblioteca {{ library.name }}</h2>
-        <form>
+        <form method="post" action="/borrow_book/">
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Titolo</th>
                         <th>Autore</th>
-                        <th>Biblioteca</th>
-                        <th>In Prestito</th>
                         <th>Da prendere</th>
                     </tr>
                 </thead>
@@ -86,47 +84,24 @@
                             <td>{{ book.book_id }}</td>
                             <td>{{ book.title }}</td>
                             <td>{{ book.author }}</td>
-                            <td>{{ book.owned_by }}</td>
-                            <td>{{ book.is_borrowed }}</td>
-                            <td><input type="radio" id="prestito" name="prestito" value={{ book.book_id }}></td>
+                            <td><input type="radio" id="prestito" name="prestito" value={{ book.book_id }} required></td>
                         </tr>
                     {% endfor %}
+                    <tr>
+                        <td colspan="2">
+                            <select name="member" id="member" required>
+                                <option value={{ member.member_id }}>{{ member }}</option>
+                            </select>
+                        </td>
+                        <td colspan="2">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <button type="submit">Borrow Book</button>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-            {% csrf_token %}
-            <div class="form-group">
-                <button type="submit">Borrow Book</button>
-            </div>
         </form>
-        <h1>Elenco dei Membri</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>In Prestito</th>
-                    <th>biblioteca</th>
-                </tr>
-            </thead>
-            <tbody>
-                <td>{{ member.member_id }}</td>
-                <td>{{ member.name }}</td>
-                <td>{{ member.borrowed_books }}</td>
-                <td>{{ member.assigned }}</td>
-            </tbody>
-        </table>
-        <h1>Elenco delle Biblioteche</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Biblioteche</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ library.name }}</td>
-            </tr>
-        </tbody>
-    </table>
     </body>
 </html>

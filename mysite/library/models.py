@@ -38,36 +38,11 @@ class Library(models.Model):
         member = Member.objects.get(member_id=member_id)
         library = Library.objects.filter(members=member).first()
         return library"""
-    
-class Book(models.Model):
-    book_id = models.CharField(max_length=100, default=None)
-    title = models.CharField(max_length=100, default = None)
-    author = models.CharField(max_length=100, default = None)
-    owned_by = models.ForeignKey(Library, on_delete=models.CASCADE, null=True, related_name='books')
-    is_borrowed = models.BooleanField(default=False)
-    is_expired = models.BooleanField(default=False)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['book_id'], name='unique_book_id'
-            )
-        ]
-
-    def setLibrary(self, library):
-        self.library = library
-
-    def getLibrary(self):
-        return self.library
-
-    def __str__(self):
-        return f"{self.book_id}, {self.title}, {self.author}, {self.is_borrowed}"
 
 class Member(models.Model):
     member_id = models.CharField(max_length=100, default = None)
     name = models.CharField(max_length=100, default = None)
     assigned = models.ForeignKey(Library, on_delete=models.CASCADE, null=True, related_name='members')
-    borrowed_books = models.ManyToManyField(Book, default = None)
 
     class Meta:
         constraints = [
@@ -77,4 +52,34 @@ class Member(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.member_id}, {self.name}, {self.borrowed_books}"
+        return f"{self.member_id}, {self.name}"
+
+class Book(models.Model):
+    book_id = models.CharField(max_length=100, default=None)
+    title = models.CharField(max_length=100, default = None)
+    author = models.CharField(max_length=100, default = None)
+    owned_by = models.ForeignKey(Library, on_delete=models.CASCADE, null=True, related_name='books')
+    is_borrowed = models.BooleanField(default=False)
+    is_expired = models.BooleanField(default=False)
+    borrowed_by = models.ForeignKey(Member, on_delete=models.DO_NOTHING, null=True, default=None)
+
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['book_id'], name='unique_book_id'
+            )
+        ]
+
+    def borrow(self, member: Member):
+        self.borrowed_by = member
+        self.is_borrowed = True
+        self.save()
+    
+    def giveBack(self):
+        self.borrowed_by = None
+        self.is_borrowed = False
+        self.save()
+
+    def __str__(self):
+        return f"{self.book_id}, {self.title}, {self.author}, {self.is_borrowed}"

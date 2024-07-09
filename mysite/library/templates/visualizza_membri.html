@@ -24,7 +24,6 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>In Prestito</th>
                 <th>biblioteca</th>
             </tr>
         </thead>
@@ -33,7 +32,6 @@
                 <tr>
                     <td>{{ membro.member_id }}</td>
                     <td>{{ membro.name }}</td>
-                    <td>{{ membro.borrowed_books }}</td>
                     <td>{{ membro.assigned }}</td>
                 </tr>
             {% endfor %}
