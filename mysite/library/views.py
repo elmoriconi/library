@@ -3,7 +3,7 @@ from .models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
-
+#controllare url perchè se per esempio vado in return book e poi voglio aggiungere una biblioteca scazza
 def index(request):
     biblioteche = Library.objects.all()
     libri = Book.objects.all()
