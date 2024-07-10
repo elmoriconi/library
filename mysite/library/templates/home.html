@@ -48,11 +48,16 @@
                 <button type="submit">Add Book</button>
             </div>
         </form>
-        <form method="post" action="/modify_book/">
+        <form method="post" action="/form_modify_book/">
             <label for="book">Choose a book to edit</label>
             <br>
+            {% csrf_token %}
             <select name="book" id="book" required>
+                {% for libro in libri %}
+                <option value={{ libro.book_id }}>{{ libro.title }}</option>
+                {% endfor %}
             </select>
+            <br>
             <div class="form-group">
                 <button type="submit">Edit Book</button>
             </div>

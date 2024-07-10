@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form borrow</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/library.css' %}">
+    </head>
+    <body>
+        <h1>Libro attuale</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Titolo</th>
+                <th>Autore</th>
+                <th>Biblioteca</th>
+                <th>In Prestito</th>
+                <th>In Prestito A</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ libro.title }}</td>
+                <td>{{ libro.author }}</td>
+                <td>{{ libro.owned_by }}</td>
+                <td>{{ libro.is_borrowed }}</td>
+                <td>{{ libro.borrowed_by }}</td>
+            </tr>
+            <form>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <label for="titile">Titolo:</label>
+                            <input type="text" name="title">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label for="author">Autore:</label>
+                            <input type="text" name="author">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <label for="titile">Titolo:</label>
+                            <input type="text" name="title">
+                        </div>
+                    </td>
+                </tr>
+            </form>
+        </tbody>
+    </table>
+    </body>
+</html>
