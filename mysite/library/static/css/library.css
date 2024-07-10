@@ -8,6 +8,10 @@ body {
 }
 h1, h2 {
   text-align: center;
+  color: #234428;
+}
+title {
+  color: #234428
 }
 ul {
   list-style-type: none;
@@ -17,7 +21,7 @@ li {
   margin-bottom: 10px;
 }
 .book, .member {
-  border: 1px solid #ccc;
+  border: 1px solid #234428;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -54,7 +58,7 @@ table {
 th, td {
   padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #234428;
 }
 th {
   background-color: #f2f2f2;
