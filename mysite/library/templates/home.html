@@ -4,7 +4,7 @@
 <head>
     <title>Library Management</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'library/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'libary.css' %}">
     <!--<style>
         body {
             font-family: Arial, sans-serif;
@@ -115,8 +115,6 @@
             <label for="book">Choose a book to edit</label>
             <br>
             <select name="book" id="book" required>
-                {% for libro in libri %}
-                <option value={{ libro.book_id }}>{{ libro.name }}</option>
             </select>
             <div class="form-group">
                 <button type="submit">Edit Book</button>

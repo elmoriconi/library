@@ -14,6 +14,7 @@ def create_library(request):
     try:
         if request.method == 'POST':
             library = request.POST['libraryname']
+            library = library.replace(" ", "")
             new_library = Library.objects.create(name=library)
             new_library.save()
     except Exception as e:
