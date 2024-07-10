@@ -12,5 +12,7 @@ urlpatterns = [
     path('form_borrow/', views.form_borrow, name='form_borrow'),
     path('borrow_book/', views.borrow_book, name='borrow_book'),
     path('form_return/', views.form_return, name='form_return'),
-    path('return_book/', views.return_book, name='return_book')
+    path('return_book/', views.return_book, name='return_book'),
+    path('modify_book/', views.modify_book, name='modify_book'),
+    path('form_modify_book/', views.form_modify_book, name='form_modify_book')
 ]

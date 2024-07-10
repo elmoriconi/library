@@ -36,6 +36,24 @@ def inserimento(request):
         print(f"Someting gone wrong\n{e}")
     finally:  
         return redirect('/')
+    
+def form_modify_book(request):
+    try:
+        if request.method == 'POST':
+            book = request.POST['book']
+            book_istance = Book.objects.get(book_id=book)
+            return render(request, 'form_modify_book.html', {'book': book_istance})
+    except Exception as e:
+        print(f"Someting gone wrong\n{e}")
+        return redirect('/')
+
+def modify_book(request):
+    try:
+        if request.method == 'POST':
+            book = request.POST['book']
+            book_istance = Book.objects.get(book_id=book)
+    except:
+        pass
 
 @csrf_exempt
 def inserimento_membri(request):

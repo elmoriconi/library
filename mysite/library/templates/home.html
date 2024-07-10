@@ -111,6 +111,17 @@
                 <button type="submit">Add Book</button>
             </div>
         </form>
+        <form method="post" action="/modify_book/">
+            <label for="book">Choose a book to edit</label>
+            <br>
+            <select name="book" id="book" required>
+                {% for libro in libri %}
+                <option value={{ libro.book_id }}>{{ libro.name }}</option>
+            </select>
+            <div class="form-group">
+                <button type="submit">Edit Book</button>
+            </div>
+        </form>
         
         <a href="/visualizza/">visualizza libri</a>
         <ul id="book-list"></ul>
