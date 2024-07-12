@@ -26,31 +26,41 @@
                 <td>{{ book.is_borrowed }}</td>
                 <td>{{ book.borrowed_by }}</td>
             </tr>
-            <form>
+            <form method='post' action='/modify_book/'>
                 <tr>
                     <td>
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="titile">Titolo:</label>
                             <input type="text" name="title">
                         </div>
                     </td>
                     <td>
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="author">Autore:</label>
                             <input type="text" name="author">
                         </div>
                     </td>
                     <td>
+                        {% csrf_token %}
                         <label for="library">Choose a library:</label>
                         <br>
                         <select name="library" id="library" required>
-                            <option value=None>Nessun cambiamento</option>
+                            <option value="None">Nessun cambiamento</option>
                             {% for biblioteca in biblioteche %}
                             <option value={{ biblioteca.name }}>{{ biblioteca.name }}</option>
                             {% endfor %}
                         </select>
                     </td>
                     <td>
+                        {% csrf_token %}
+                        <select name="book" id="book" required hidden>
+                            <option value={{ book.book_id }}>{{ book.title }}</option>
+                        </select>
+                    </td>
+                    <td>
+                        {% csrf_token %}
                         <div class="form-group">
                             <button type="submit">Modifica</button>
                         </div>

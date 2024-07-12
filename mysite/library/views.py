@@ -42,19 +42,34 @@ def form_modify_book(request):
         if request.method == 'POST':
             book = request.POST['book']
             book_istance = Book.objects.get(book_id=book)
+            if book_istance.is_borrowed:
+                return redirect('/')
             biblioteche = Library.objects.all()
             return render(request, 'form_modify_book.html', {'book': book_istance, 'biblioteche': biblioteche})
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
+@csrf_exempt
 def modify_book(request):
     try:
         if request.method == 'POST':
             book = request.POST['book']
             book_istance = Book.objects.get(book_id=book)
+            title = request.POST['title']
+            author = request.POST['author']
+            library = request.POST['library']
+            if title:
+                book_istance.title = title
+            if author:
+                book_istance.author = author
+            if not(library == "None"):
+                library_istance = Library.objects.get(name=library)
+                book_istance.owned_by = library_istance
+            book_istance.save()
+            return redirect('/')
     except:
-        pass
+        return redirect('/')
 
 @csrf_exempt
 def inserimento_membri(request):
@@ -67,7 +82,7 @@ def inserimento_membri(request):
             nuovo_membro = Member.objects.create(member_id=id_member, name=nome, assigned=biblioteca_agg)
             nuovo_membro.save()
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
     finally:
         return redirect('/') 
 
@@ -116,7 +131,7 @@ def borrow_book(request):
             book_istance = Book.objects.get(book_id=book)
             member_istance = Member.objects.get(member_id=member)
             book_istance.borrow(member_istance)
-        return index(request)
+        return redirect(index(request))
     except Exception as e:
         print(f"Someting gone wrong\n{e}")
         return redirect('/')
@@ -140,7 +155,7 @@ def return_book(request):
             book = request.POST['prestito']
             book_istance = Book.objects.get(book_id=book)
             book_istance.giveBack()
-        return index(request)
+        return redirect(index(request))
     except Exception as e:
         print(f"Someting gone wrong\n{e}")
         return redirect('/')
