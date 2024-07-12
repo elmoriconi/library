@@ -52,7 +52,7 @@ class Member(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.member_id}, {self.name}"
+        return f"{self.name}"
 
 class Book(models.Model):
     book_id = models.CharField(max_length=100, default=None)

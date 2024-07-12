@@ -14,7 +14,6 @@ def create_library(request):
     try:
         if request.method == 'POST':
             library = request.POST['libraryname']
-            library = library.replace(" ", "")
             new_library = Library.objects.create(name=library)
             new_library.save()
     except Exception as e:
@@ -43,7 +42,8 @@ def form_modify_book(request):
         if request.method == 'POST':
             book = request.POST['book']
             book_istance = Book.objects.get(book_id=book)
-            return render(request, 'form_modify_book.html', {'libro': book_istance})
+            biblioteche = Library.objects.all()
+            return render(request, 'form_modify_book.html', {'book': book_istance, 'biblioteche': biblioteche})
     except Exception as e:
         print(f"Someting gone wrong\n{e}")
         return redirect('/')
@@ -51,10 +51,8 @@ def form_modify_book(request):
 def modify_book(request):
     try:
         if request.method == 'POST':
-            book_id = request.POST['book_id']
-            title = request.POST['title']
-            author = request.POST['author']
-            owned_by = request.POST['owned_by']
+            book = request.POST['book']
+            book_istance = Book.objects.get(book_id=book)
     except:
         pass
 

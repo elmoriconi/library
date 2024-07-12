@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/library.css' %}">
     </head>
     <body>
-        <h1>Libro attuale</h1>
+        <h3>Scrivi i campi che vuoi modificare e lascia vuoti quelli da tenere</h3>
     <table>
         <thead>
             <tr>
@@ -20,11 +20,11 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ libro.title }}</td>
-                <td>{{ libro.author }}</td>
-                <td>{{ libro.owned_by }}</td>
-                <td>{{ libro.is_borrowed }}</td>
-                <td>{{ libro.borrowed_by }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.owned_by.name }}</td>
+                <td>{{ book.is_borrowed }}</td>
+                <td>{{ book.borrowed_by }}</td>
             </tr>
             <form>
                 <tr>
@@ -41,9 +41,18 @@
                         </div>
                     </td>
                     <td>
+                        <label for="library">Choose a library:</label>
+                        <br>
+                        <select name="library" id="library" required>
+                            <option value=None>Nessun cambiamento</option>
+                            {% for biblioteca in biblioteche %}
+                            <option value={{ biblioteca.name }}>{{ biblioteca.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
                         <div class="form-group">
-                            <label for="titile">Titolo:</label>
-                            <input type="text" name="title">
+                            <button type="submit">Modifica</button>
                         </div>
                     </td>
                 </tr>
