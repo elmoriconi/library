@@ -1,5 +1,6 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: Garamond, serif;
+  background-color: rgb(213, 241, 232);
 }
 .container {
   max-width: 800px;
@@ -9,9 +10,11 @@ body {
 h1, h2, h3 {
   text-align: center;
   color: #234428;
+  font-weight: bold; 
 }
 title {
-  color: #234428
+  color: #234428;
+  font-weight: bold; 
 }
 ul {
   list-style-type: none;

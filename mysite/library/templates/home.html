@@ -34,7 +34,7 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="book-id">Book ID:</label>
-                <input type="text" name="book-id" required>
+                <input type="text" name="book-id" pattern="[0-9]+" required>
             </div>
             <div class="form-group">
                 <label for="book-title">Title:</label>
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label for="book-author">Author:</label>
-                <input type="text" name="book-author" required>
+                <input type="text" name="book-author" pattern="[A-Za-z]+" required>
             </div>
             <div class="form-group">
                 <button type="submit">Add Book</button>
@@ -78,11 +78,11 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="member-id">Member ID:</label>
-                <input type="text" name="member-id" required>
+                <input type="text" name="member-id" pattern="[0-9]+" required>
             </div>
             <div class="form-group">
                 <label for="member-name">Name:</label>
-                <input type="text" name="member-name" required>
+                <input type="text" name="member-name" pattern="[A-Za-z]+" required>
             </div>
             <div class="form-group">
                 <button type="submit">Add Member</button>

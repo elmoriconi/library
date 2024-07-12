@@ -3,7 +3,6 @@ from .models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
-#controllare url perchè se per esempio vado in return book e poi voglio aggiungere una biblioteca scazza
 def index(request):
     biblioteche = Library.objects.all()
     libri = Book.objects.all()
@@ -17,7 +16,7 @@ def create_library(request):
             new_library = Library.objects.create(name=library)
             new_library.save()
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
     finally:
         return redirect('/')
 
@@ -33,7 +32,7 @@ def inserimento(request):
             nuovo_libro = Book.objects.create(book_id=id_book, title=titolo, author=autore, owned_by=biblioteca_agg)
             nuovo_libro.save()
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
     finally:  
         return redirect('/')
     
@@ -67,8 +66,9 @@ def modify_book(request):
                 library_istance = Library.objects.get(name=library)
                 book_istance.owned_by = library_istance
             book_istance.save()
-            return redirect('/')
-    except:
+    except Exception as e:
+        print(f"Something has gone wrong\n{e}")
+    finally:
         return redirect('/')
 
 @csrf_exempt
@@ -91,7 +91,7 @@ def visualizza(request):
         libri = Book.objects.all()
         return render(request, 'visualizza.html', {'libri': libri})
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
 def visualizza_biblioteche(request):
@@ -99,7 +99,7 @@ def visualizza_biblioteche(request):
         biblioteche = Library.objects.all()
         return render(request, 'visualizza_biblioteche.html', {'biblioteche': biblioteche})
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
 def visualizza_membri(request):
@@ -107,7 +107,7 @@ def visualizza_membri(request):
         membri = Member.objects.all()
         return render(request, 'visualizza_membri.html', {'membri': membri})
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
 def form_borrow(request):
@@ -119,7 +119,7 @@ def form_borrow(request):
             libri_biblioteca = Book.objects.filter(owned_by=biblioteca.name, is_borrowed=False)
         return render(request, 'form_borrow.html', {'library': biblioteca, 'member': member_istance, 'books': libri_biblioteca})
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
 
@@ -133,7 +133,7 @@ def borrow_book(request):
             book_istance.borrow(member_istance)
         return redirect(index(request))
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
 def form_return(request):
@@ -145,7 +145,7 @@ def form_return(request):
             libri_biblioteca = Book.objects.filter(owned_by=biblioteca.name, is_borrowed=True, borrowed_by=member_istance)
         return render(request, 'form_return.html', {'library': biblioteca, 'member': member_istance, 'books': libri_biblioteca})
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
 
@@ -157,5 +157,5 @@ def return_book(request):
             book_istance.giveBack()
         return redirect(index(request))
     except Exception as e:
-        print(f"Someting gone wrong\n{e}")
+        print(f"Something has gone wrong\n{e}")
         return redirect('/')
