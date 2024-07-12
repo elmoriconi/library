@@ -1,6 +1,9 @@
 body {
   font-family: Garamond, serif;
   background-color: rgb(213, 241, 232);
+  background-image: url();
+  background-repeat: no-repeat;
+  background-attachment:fixed;
 }
 .container {
   max-width: 800px;
