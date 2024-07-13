@@ -101,6 +101,17 @@ def visualizza_specifica_libro(request):
     except Exception as e:
         print(f"Something has gone wrong\n{e}")
         return redirect('/')
+    
+def elimina_libro(request):
+    try:
+        if request.method == 'POST':
+            book_istance = Book.objects.get(book_id=request.POST['book'])
+            if not book_istance.is_borrowed:
+                book_istance.delete()
+    except Exception as e:
+        print(f"Something has gone wrong\n{e}")
+    finally:
+        return redirect('/')
 
 def visualizza_biblioteche(request):
     try:

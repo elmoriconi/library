@@ -77,6 +77,21 @@
                 <button type="submit">Visualizza specifiche</button>
             </div>
         </form>
+
+        <form method='post' action='/elimina_libro/'>
+            <label for='book'>Elimina un libro</label>
+            <br>
+            {% csrf_token %}
+            <select name="book" id="book" required>
+                {% for libro in libri %}
+                <option value={{ libro.book_id }}>{{ libro.title }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <div class=form-group>
+                <button type="submit">Elimina libro</button>
+            </div>
+        </form>
         
         <a href="/visualizza/">visualizza tutti i libri</a>
         <ul id="book-list"></ul>
@@ -135,109 +150,5 @@
             </form>
     </div>
 
-    <script>
-        const books = [];
-        const members = [];
-
-        function loadBooks() {
-            const bookList = document.getElementById('book-list');
-            bookList.innerHTML = '';
-            books.forEach(book => {
-                const bookItem = document.createElement('li');
-                bookItem.className = 'book';
-                bookItem.innerHTML = `
-                    <strong>Book ID:</strong> ${book.book_id} <br>
-                    <strong>Title:</strong> ${book.title} <br>
-                    <strong>Author:</strong> ${book.author} <br>
-                    <strong>Status:</strong> ${book.is_borrowed ? 'Borrowed' : 'Available'} <br>
-                    <strong>Expired:</strong> ${book.is_expired ? 'Expired' : 'Not Expired'} <br>
-                    <div class="actions">
-                        <select id="member-select-${book.book_id}" ${book.is_borrowed ? 'disabled' : ''}>
-                            <option value="">Select Member</option>
-                            ${members.map(member => `<option value="${member.member_id}">${member.name}</option>`).join('')}
-                        </select>
-                        <button onclick="borrowBook('${book.book_id}')" ${book.is_borrowed ? 'disabled' : ''}>Borrow</button>
-                        <button onclick="returnBook('${book.book_id}')" ${book.is_borrowed ? '' : 'disabled'}>Return</button>
-                    </div>
-                `;
-                bookList.appendChild(bookItem);
-            });
-        }
-
-        function loadMembers() {
-            const memberList = document.getElementById('member-list');
-            memberList.innerHTML = '';
-            members.forEach(member => {
-                const memberItem = document.createElement('li');
-                memberItem.className = 'member';
-                memberItem.innerHTML = `
-                    <strong>Member ID:</strong> ${member.member_id} <br>
-                    <strong>Name:</strong> ${member.name} <br>
-                    <strong>Borrowed Books:</strong> ${member.borrowed_books.length > 0 ? member.borrowed_books.map(book => book.title).join(', ') : 'None'} <br>
-                `;
-                memberList.appendChild(memberItem);
-            });
-        }
-
-        function borrowBook(book_id) {
-            const memberSelect = document.getElementById(`member-select-${book_id}`);
-            const member_id = memberSelect.value;
-
-            if (!member_id) {
-                alert("Please select a member.");
-                return;
-            }
-
-            const member = members.find(m => m.member_id === member_id);
-            const book = books.find(b => b.book_id === book_id);
-
-            if (book && !book.is_borrowed) {
-                book.is_borrowed = true;
-                member.borrowed_books.push(book);
-                loadBooks();
-                loadMembers();
-            }
-        }
-
-        function returnBook(book_id) {
-            const book = books.find(b => b.book_id === book_id);
-            const member = members.find(m => m.borrowed_books.some(b => b.book_id === book_id));
-
-            if (book && book.is_borrowed && member) {
-                book.is_borrowed = false;
-                member.borrowed_books = member.borrowed_books.filter(b => b.book_id !== book_id);
-                loadBooks();
-                loadMembers();
-            }
-        }
-
-        document.getElementById('add-book-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const bookId = document.getElementById('book-id').value;
-            const title = document.getElementById('book-title').value;
-            const author = document.getElementById('book-author').value;
-
-            books.push({ book_id: bookId, title: title, author: author, is_borrowed: false });
-            loadBooks();
-
-            document.getElementById('add-book-form').reset();
-        });
-
-        document.getElementById('add-member-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const memberId = document.getElementById('member-id').value;
-            const name = document.getElementById('member-name').value;
-
-            members.push({ member_id: memberId, name: name, borrowed_books: [] });
-            loadMembers();
-
-            document.getElementById('add-member-form').reset();
-        });
-
-        window.onload = function() {
-            loadBooks();
-            loadMembers();
-        };
-    </script>
 </body>
 </html>

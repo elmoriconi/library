@@ -16,5 +16,6 @@ urlpatterns = [
     path('modify_book/', views.modify_book, name='modify_book'),
     path('form_modify_book/', views.form_modify_book, name='form_modify_book'),
     path('modify_book/', views.modify_book, name='modify_book'),
-    path('visualizza_specifica_libro/', views.visualizza_specifica_libro, name='visualizza_specifica_libro')
+    path('visualizza_specifica_libro/', views.visualizza_specifica_libro, name='visualizza_specifica_libro'),
+     path('elimina_libro/', views.elimina_libro, name='elimina_libro')
 ]
