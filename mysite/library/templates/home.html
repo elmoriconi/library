@@ -57,13 +57,28 @@
                 <option value={{ libro.book_id }}>{{ libro.title }}</option>
                 {% endfor %}
             </select>
-            <br>
+            <br><br>
             <div class="form-group">
                 <button type="submit">Edit Book</button>
             </div>
         </form>
+
+        <form method='post' action='/visualizza_specifica_libro/'>
+            <label for="book">visualizza tutte le specifiche del libro</label>
+            <br>
+            {% csrf_token %}
+            <select name="book" id="book" required>
+                {% for libro in libri %}
+                <option value={{ libro.book_id }}>{{ libro.title }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <div class=form-group>
+                <button type="submit">Visualizza specifiche</button>
+            </div>
+        </form>
         
-        <a href="/visualizza/">visualizza libri</a>
+        <a href="/visualizza/">visualizza tutti i libri</a>
         <ul id="book-list"></ul>
 
         <h2>Members</h2>

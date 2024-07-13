@@ -93,6 +93,14 @@ def visualizza(request):
     except Exception as e:
         print(f"Something has gone wrong\n{e}")
         return redirect('/')
+    
+def visualizza_specifica_libro(request):
+    try:
+        if request.method == 'POST':
+            return render(request, 'visualizza_specifica_libro.html', {'libro': Book.objects.get(book_id=request.POST['book'])})
+    except Exception as e:
+        print(f"Something has gone wrong\n{e}")
+        return redirect('/')
 
 def visualizza_biblioteche(request):
     try:

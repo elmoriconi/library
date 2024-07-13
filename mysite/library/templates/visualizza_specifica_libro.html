@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elenco dei Libri</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/library.css' %}">
+</head>
+<body>
+    <div>
+        <h4>Specifiche del libro: {{ libro.title }}</h4>
+        <p>
+            L'identificatore del libro selezionato è {{ libro.book_id }}.<br>
+            Scritto da {{ libro.author }}, attualmente è posseduto dalla biblioteca {{ libro.owned_by.name }}.<br>
+            In questo momento
+            {% if libro.is_borrowed %}
+                il libro è preso in prestito da {{ libro.borrowed_by.name }}.<br>
+            {% else %}
+                il libro non è preso in prestito da nessuno.<br>
+            {% endif %}    
+        </p>
+    </div>
+    </body>
+</html>
