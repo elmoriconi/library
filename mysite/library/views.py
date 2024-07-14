@@ -141,6 +141,34 @@ def form_borrow(request):
         print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
+def form_modify_member(request):
+    try:
+        if request.method == 'POST':
+            member = Member.objects.get(member_id=request.POST['member'])
+            books = Book.objects.filter(borrowed_by=member)
+            if books:
+                return redirect('/')
+        return render(request, 'form_modify_member.html', {'member': member, 'biblioteche': Library.objects.all()})
+    except Exception as e:
+        print(f"Something has gone wrong\n{e}")
+        return redirect('/')
+    
+def modify_member(request):
+    try:
+        if request.method == 'POST':
+            member = Member.objects.get(member_id=request.POST['member'])
+            name = request.POST['name']
+            library = request.POST['library']
+            if name:
+                member.name = name
+            if not(library == "None"):
+                library_istance = Library.objects.get(name=library)
+                member.assigned = library_istance
+            member.save()
+    except Exception as e:
+        print(f"Something has gone wrong\n{e}")
+    finally:
+        return redirect('/')
 
 def borrow_book(request):
     try:

@@ -11,35 +11,26 @@
     <table>
         <thead>
             <tr>
-                <th>Titolo</th>
-                <th>Autore</th>
-                <th>Biblioteca</th>
-                <th>In Prestito</th>
-                <th>In Prestito A</th>
+                <th colspan='1'>Nome</th>
+                <th colspan='1'>Biblioteca</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ book.title }}</td>
-                <td>{{ book.author }}</td>
-                <td>{{ book.owned_by.name }}</td>
-                <td>{{ book.is_borrowed }}</td>
-                <td>{{ book.borrowed_by }}</td>
+                <td colspan='1'>{{ member.name }}</td>
+                <td colspan='1'>{{ member.assigned.name }}</td>
+                <td></td>
+                <td></td>
             </tr>
-            <form method='post' action='/modify_book/'>
+            <form method='post' action='/modify_member/'>
                 <tr>
                     <td>
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="titile">Titolo:</label>
-                            <input type="text" name="title">
-                        </div>
-                    </td>
-                    <td>
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="author">Autore:</label>
-                            <input type="text" name="author">
+                            <label for="name">Nome:</label>
+                            <input type="text" name="name">
                         </div>
                     </td>
                     <td>
@@ -55,8 +46,8 @@
                     </td>
                     <td>
                         {% csrf_token %}
-                        <select name="book" id="book" required hidden>
-                            <option value={{ book.book_id }}>{{ book.title }}</option>
+                        <select name="member" id="member" required hidden>
+                            <option value={{ member.member_id }}>{{ member.name }}</option>
                         </select>
                     </td>
                     <td>

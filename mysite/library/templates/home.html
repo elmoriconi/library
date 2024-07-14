@@ -119,6 +119,21 @@
             </div>
         </form>
 
+        <form method="post" action="/form_modify_member/">
+            <label for='member'>Choose a member to edit</label>
+            <br>
+            {% csrf_token %}
+            <select name='member' id='member' required>
+                {% for membro in membri%}
+                <option value={{ membro.member_id }}>{{ membro.name }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <div class="form-group">
+                <button type="submit">Edit Member</button>
+            </div>
+        </form>
+
         <a href="/visualizza_membri/">visualizza membri</a>
         <ul id="member-list"></ul>
 
