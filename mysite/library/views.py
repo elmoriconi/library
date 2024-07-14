@@ -169,6 +169,19 @@ def modify_member(request):
         print(f"Something has gone wrong\n{e}")
     finally:
         return redirect('/')
+    
+def elimina_membro(request):
+    try:
+        if request.method == 'POST':
+            member = Member.objects.get(member_id=request.POST['member'])
+            books = Book.objects.filter(borrowed_by=member)
+            if books:
+                return redirect('/')
+            member.delete()
+    except Exception as e:
+        print(f"Something has gone wrong\n{e}")
+    finally:
+        return redirect('/')
 
 def borrow_book(request):
     try:

@@ -134,6 +134,21 @@
             </div>
         </form>
 
+        <form method="post" action="/elimina_membro/">
+            <label for="member">Elimina un membro</label>
+            <br>
+            {% csrf_token %}
+            <select name="member" id="member">
+                {% for membro in membri%}
+                <option value={{ membro.member_id }}>{{ membro.name }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <div class=form-group>
+                <button type="submit">Elimina membro</button>
+            </div>
+        </form>
+
         <a href="/visualizza_membri/">visualizza membri</a>
         <ul id="member-list"></ul>
 
