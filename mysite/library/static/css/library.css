@@ -1,23 +1,37 @@
 body {
   font-family: Garamond, serif;
-  background-color: rgb(213, 241, 232);
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #92BFB1;
   background-image: url();
   background-repeat: no-repeat;
   background-attachment:fixed;
 }
 .container {
-  max-width: 800px;
+  max-width: 700px;
   margin: auto;
   padding: 20px;
 }
 h1, h2, h3 {
   text-align: center;
-  color: #234428;
+  color: #1B3022;
+  font-weight: bold; 
+  font-size: 40px;
+}
+h4 {
+  text-align: center;
+  color: #1B3022;
   font-weight: bold; 
 }
-title {
-  color: #234428;
+p {
+  color: #1B3022;
   font-weight: bold; 
+  font-size: 20px;
+}
+title {
+  color: #772014;
+  font-weight: bold; 
+  font-size: 100px;
 }
 ul {
   list-style-type: none;
@@ -27,7 +41,7 @@ li {
   margin-bottom: 10px;
 }
 .book, .member {
-  border: 1px solid #234428;
+  border: 1px solid #1B3022;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -49,7 +63,7 @@ li {
 }
 .form-group button {
   padding: 10px 15px;
-  background-color: #28a745;
+  background-color: #772014;
   color: white;
   border: none;
   cursor: pointer;
@@ -64,8 +78,9 @@ table {
 th, td {
   padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #234428;
+  border-bottom: 1px solid #1B3022;
 }
 th {
-  background-color: #f2f2f2;
+  background-color: #1B3022;
+  color: white;
 }

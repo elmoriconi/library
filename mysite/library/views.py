@@ -7,12 +7,14 @@ def index(request):
     biblioteche = Library.objects.all()
     libri = Book.objects.all()
     membri = Member.objects.all()
-    return render(request, 'home.html', {'biblioteche': biblioteche, 'libri': libri, 'membri': membri})
+    libri_modificabili = Book.objects.filter(is_borrowed=False)
+    return render(request, 'home.html', {'biblioteche': biblioteche, 'libri': libri, 'membri': membri, 'libri_modificabili': libri_modificabili})
 
 def create_library(request):
     try:
         if request.method == 'POST':
             library = request.POST['libraryname']
+            library = library.replace(" ", "_")
             new_library = Library.objects.create(name=library)
             new_library.save()
     except Exception as e:

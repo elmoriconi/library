@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/library.css' %}">
     </head>
     <body>
-        <h2>Elenco libri che {{ member.name }} può prendere alla biblioteca {{ library.name }}</h2>
+        <h2>Libri disponibili</h2>
         <form method="post" action="/borrow_book/">
             <table>
                 <thead>
@@ -15,7 +15,7 @@
                         <th>ID</th>
                         <th>Titolo</th>
                         <th>Autore</th>
-                        <th>Da prendere</th>
+                        <th>Prendi in prestito</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +36,7 @@
                         <td colspan="2">
                             {% csrf_token %}
                             <div class="form-group">
-                                <button type="submit">Borrow Book</button>
+                                <button type="submit">Conferma</button>
                             </div>
                         </td>
                     </tr>

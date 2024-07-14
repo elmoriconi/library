@@ -13,7 +13,7 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>biblioteca</th>
+                <th>Biblioteca</th>
             </tr>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ membro.member_id }}</td>
                     <td>{{ membro.name }}</td>
-                    <td>{{ membro.assigned }}</td>
+                    <td>{{ membro.assigned.name }}</td>
                 </tr>
             {% endfor %}
         </tbody>

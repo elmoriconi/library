@@ -7,7 +7,8 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/library.css' %}">
     </head>
     <body>
-        <h3>Scrivi i campi che vuoi modificare e lascia vuoti quelli da tenere</h3>
+        <h3>Modifica libro</h3>
+        <h4>Scrivi i campi che vuoi modificare e lascia vuoti quelli da tenere</h4>
     <table>
         <thead>
             <tr>
@@ -44,7 +45,7 @@
                     </td>
                     <td>
                         {% csrf_token %}
-                        <label for="library">Choose a library to change:</label>
+                        <label for="library">Biblioteca:</label>
                         <br>
                         <select name="library" id="library" required>
                             <option value="None">Nessun cambiamento</option>

@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/library.css' %}">
     </head>
     <body>
-        <h2>Elenco libri che {{ member.name }} può restituire alla biblioteca {{ library.name }}</h2>
+        <h2>Libri da restituire</h2>
         <form method="post" action="/return_book/">
             <table>
                 <thead>
@@ -36,7 +36,7 @@
                         <td colspan="2">
                             {% csrf_token %}
                             <div class="form-group">
-                                <button type="submit">Return Book</button>
+                                <button type="submit">Conferma</button>
                             </div>
                         </td>
                     </tr>

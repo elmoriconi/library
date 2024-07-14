@@ -8,23 +8,23 @@
 </head>
 <body>
     <div class="container">
-        <h1>Library</h1>
+        <h1>Biblioteche</h1>
         <form method='post' action='create_library/'>
             {% csrf_token %}
             <div class="form-group">
-                <label for="createlibrary">Create a library:</label>
+                <label for="createlibrary">Crea una biblioteca:</label>
                 <br>
-                <input type="text" name="libraryname" required>
+                <input type="text" name="libraryname" pattern="[0-9A-Za-z ]+" required>
             </div>
             <div class="form-group">
-                <button type="submit">Add Library</button>
+                <button type="submit">Aggiungi</button>
             </div>
         </form>
         <a href="/visualizza_biblioteche/">visualizza biblioteche</a>
 
-        <h2>Books</h2>
+        <h2>Libri</h2>
         <form method="post" action="/inserimento/">
-            <label for="library">Choose a library:</label>
+            <label for="library">Scegli una biblioteca:</label>
             <br>
             <select name="library" id="library" required>
                 {% for biblioteca in biblioteche %}
@@ -33,38 +33,38 @@
             </select>
             {% csrf_token %}
             <div class="form-group">
-                <label for="book-id">Book ID:</label>
+                <label for="book-id">ID:</label>
                 <input type="text" name="book-id" pattern="[0-9]+" required>
             </div>
             <div class="form-group">
-                <label for="book-title">Title:</label>
+                <label for="book-title">Titolo:</label>
                 <input type="text" name="book-title" required>
             </div>
             <div class="form-group">
-                <label for="book-author">Author:</label>
-                <input type="text" name="book-author" pattern="[A-Za-z]+" required>
+                <label for="book-author">Autore:</label>
+                <input type="text" name="book-author" pattern="[A-Za-z ]+" required>
             </div>
             <div class="form-group">
-                <button type="submit">Add Book</button>
+                <button type="submit">Aggiungi</button>
             </div>
         </form>
         <form method="post" action="/form_modify_book/">
-            <label for="book">Choose a book to edit</label>
+            <label for="book">Modifica libro</label>
             <br>
             {% csrf_token %}
             <select name="book" id="book" required>
-                {% for libro in libri %}
+                {% for libro in libri_modificabili %}
                 <option value={{ libro.book_id }}>{{ libro.title }}</option>
                 {% endfor %}
             </select>
             <br><br>
             <div class="form-group">
-                <button type="submit">Edit Book</button>
+                <button type="submit">Modifica</button>
             </div>
         </form>
 
         <form method='post' action='/visualizza_specifica_libro/'>
-            <label for="book">visualizza tutte le specifiche del libro</label>
+            <label for="book">Visualizza specifiche libro</label>
             <br>
             {% csrf_token %}
             <select name="book" id="book" required>
@@ -83,13 +83,13 @@
             <br>
             {% csrf_token %}
             <select name="book" id="book" required>
-                {% for libro in libri %}
+                {% for libro in libri_modificabili %}
                 <option value={{ libro.book_id }}>{{ libro.title }}</option>
                 {% endfor %}
             </select>
             <br><br>
             <div class=form-group>
-                <button type="submit">Elimina libro</button>
+                <button type="submit">Elimina</button>
             </div>
         </form>
         
@@ -98,7 +98,7 @@
 
         <h2>Members</h2>
         <form method="post" action="/inserimento_membri/">
-            <label for="library">Choose a library:</label>
+            <label for="library">Scegli una biblioteca:</label>
             <br>
             <select name="library" id="library">
                 {% for biblioteca in biblioteche %}
@@ -107,30 +107,30 @@
             </select>
             {% csrf_token %}
             <div class="form-group">
-                <label for="member-id">Member ID:</label>
+                <label for="member-id">ID:</label>
                 <input type="text" name="member-id" pattern="[0-9]+" required>
             </div>
             <div class="form-group">
-                <label for="member-name">Name:</label>
-                <input type="text" name="member-name" pattern="[A-Za-z]+" required>
+                <label for="member-name">Nome:</label>
+                <input type="text" name="member-name" pattern="[A-Za-z ]+" required>
             </div>
             <div class="form-group">
-                <button type="submit">Add Member</button>
+                <button type="submit">Aggiungi</button>
             </div>
         </form>
 
         <form method="post" action="/form_modify_member/">
-            <label for='member'>Choose a member to edit</label>
+            <label for='member'>Modifica membro</label>
             <br>
             {% csrf_token %}
             <select name='member' id='member' required>
-                {% for membro in membri%}
+                {% for membro in membri %}
                 <option value={{ membro.member_id }}>{{ membro.name }}</option>
                 {% endfor %}
             </select>
             <br><br>
             <div class="form-group">
-                <button type="submit">Edit Member</button>
+                <button type="submit">Modifica</button>
             </div>
         </form>
 
@@ -145,16 +145,16 @@
             </select>
             <br><br>
             <div class=form-group>
-                <button type="submit">Elimina membro</button>
+                <button type="submit">Elimina</button>
             </div>
         </form>
 
         <a href="/visualizza_membri/">visualizza membri</a>
         <ul id="member-list"></ul>
 
-        <h3>Borrow book</h3>
+        <h3>Prendi in prestito un libro</h3>
             <form method="post" action="/form_borrow/">
-                <label for="member">Choose a member:</label>
+                <label for="member">Membro:</label>
                 <select name="member" id="member" required>
                     {% for membro in membri %}
                     <option value={{ membro.member_id }}>{{ membro }}</option>
@@ -162,12 +162,12 @@
                 </select>
                 {% csrf_token %}
                 <div class="form-group">
-                    <button type="submit">Borrow Book</button>
+                    <button type="submit">Prendi in prestito</button>
                 </div>
             </form>
-        <h3>Return book</h3>
+        <h3>Restituisci libro</h3>
             <form method="post" action="/form_return/">
-                <label for="member">Choose a member:</label>
+                <label for="member">Membro:</label>
                 <select name="member" id="member" required>
                     {% for membro in membri %}
                     <option value={{ membro.member_id }}>{{ membro }}</option>
@@ -175,7 +175,7 @@
                 </select>
                 {% csrf_token %}
                 <div class="form-group">
-                    <button type="submit">Return Book</button>
+                    <button type="submit">Restituisci</button>
                 </div>
             </form>
     </div>

@@ -8,10 +8,10 @@
 </head>
 <body>
     <div>
-        <h4>Specifiche del libro: {{ libro.title }}</h4>
+        <h3>Specifiche del libro: {{ libro.title }}</h3>
         <p>
-            L'identificatore del libro selezionato è {{ libro.book_id }}.<br>
-            Scritto da {{ libro.author }}, attualmente è posseduto dalla biblioteca {{ libro.owned_by.name }}.<br>
+            Il codice identificativo del libro è: {{ libro.book_id }}, scritto da: {{ libro.author }}.<br>
+            Attualmente è posseduto dalla biblioteca: {{ libro.owned_by.name }}.<br>
             In questo momento
             {% if libro.is_borrowed %}
                 il libro è preso in prestito da {{ libro.borrowed_by.name }}.<br>
