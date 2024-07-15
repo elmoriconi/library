@@ -2,15 +2,10 @@ body {
   font-family: Garamond, serif;
   font-size: 20px;
   font-weight: bold;
-  background-color: #92BFB1;
+  background-color: #a2bfc0;
   background-image: url();
   background-repeat: no-repeat;
   background-attachment:fixed;
-}
-.container {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
 }
 h1, h2, h3 {
   text-align: center;
@@ -52,6 +47,11 @@ li {
 .form-group {
   margin-bottom: 15px;
 }
+.form-group2 {
+  text-align: right;
+  margin-bottom: 15px;
+  margin-right: 250px;
+}
 .form-group label {
   display: block;
   margin-bottom: 5px;
@@ -63,17 +63,24 @@ li {
 }
 .form-group button {
   padding: 10px 15px;
+  height: 50px;
   background-color: #772014;
   color: white;
   border: none;
   cursor: pointer;
 }
-.form-group button:disabled {
-  background-color: #ccc;
+.form-group2 button {
+  padding: 10px 15px;
+  height: 50px;
+  background-color: #772014;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 table {
   width: 100%;
   border-collapse: collapse;
+  empty-cells: hide;
 }
 th, td {
   padding: 8px;
@@ -83,4 +90,8 @@ th, td {
 th {
   background-color: #1B3022;
   color: white;
+}
+.container {
+  margin: auto;
+  padding: 20px;
 }

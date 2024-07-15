@@ -27,21 +27,20 @@
                             <td><input type="radio" id="prestito" name="prestito" value={{ book.book_id }} required></td>
                         </tr>
                     {% endfor %}
-                    <tr>
+ <!--                   <tr>
                         <td colspan="2">
                             <select name="member" id="member" required hidden>
                                 <option value={{ member.member_id }}>{{ member }}</option>
                             </select>
-                        </td>
-                        <td colspan="2">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <button type="submit">Conferma</button>
-                            </div>
-                        </td>
-                    </tr>
+                        </td>                                                               questa parte ha una funzionalità pratica?
+                    </tr>-->
                 </tbody>
             </table>
+            <br></br>
+            {% csrf_token %}
+            <div class="form-group2">
+                <button type="submit">Conferma</button>
+            </div>
         </form>
     </body>
 </html>

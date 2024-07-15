@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="container">
+        <table>
+        <tr>
+            <td>
         <h1>Biblioteche</h1>
         <form method='post' action='create_library/'>
             {% csrf_token %}
@@ -21,10 +24,14 @@
             </div>
         </form>
         <a href="/visualizza_biblioteche/">visualizza biblioteche</a>
-
+        </td>
+        <td></td>
+        </tr>
+        <tr>
+            <td>
         <h2>Libri</h2>
         <form method="post" action="/inserimento/">
-            <label for="library">Scegli una biblioteca:</label>
+            <label for="library">Biblioteca:</label>
             <br>
             <select name="library" id="library" required>
                 {% for biblioteca in biblioteche %}
@@ -48,8 +55,13 @@
                 <button type="submit">Aggiungi</button>
             </div>
         </form>
+        <a href="/visualizza/">visualizza tutti i libri</a>
+        <ul id="book-list"></ul>
+    </td>
+    <td></td>
+    <td>
         <form method="post" action="/form_modify_book/">
-            <label for="book">Modifica libro</label>
+            <label for="book">Modifica</label>
             <br>
             {% csrf_token %}
             <select name="book" id="book" required>
@@ -64,7 +76,7 @@
         </form>
 
         <form method='post' action='/visualizza_specifica_libro/'>
-            <label for="book">Visualizza specifiche libro</label>
+            <label for="book">Visualizza specifiche</label>
             <br>
             {% csrf_token %}
             <select name="book" id="book" required>
@@ -79,7 +91,7 @@
         </form>
 
         <form method='post' action='/elimina_libro/'>
-            <label for='book'>Elimina un libro</label>
+            <label for='book'>Elimina</label>
             <br>
             {% csrf_token %}
             <select name="book" id="book" required>
@@ -92,13 +104,13 @@
                 <button type="submit">Elimina</button>
             </div>
         </form>
-        
-        <a href="/visualizza/">visualizza tutti i libri</a>
-        <ul id="book-list"></ul>
-
+    </td>
+</tr>
+        <tr>
+            <td>
         <h2>Members</h2>
         <form method="post" action="/inserimento_membri/">
-            <label for="library">Scegli una biblioteca:</label>
+            <label for="library">Biblioteca:</label>
             <br>
             <select name="library" id="library">
                 {% for biblioteca in biblioteche %}
@@ -118,9 +130,13 @@
                 <button type="submit">Aggiungi</button>
             </div>
         </form>
-
+        <a href="/visualizza_membri/">visualizza membri</a>
+        <ul id="member-list"></ul>
+    </td>
+    <td></td>
+    <td>
         <form method="post" action="/form_modify_member/">
-            <label for='member'>Modifica membro</label>
+            <label for='member'>Modifica</label>
             <br>
             {% csrf_token %}
             <select name='member' id='member' required>
@@ -135,7 +151,7 @@
         </form>
 
         <form method="post" action="/elimina_membro/">
-            <label for="member">Elimina un membro</label>
+            <label for="member">Elimina</label>
             <br>
             {% csrf_token %}
             <select name="member" id="member">
@@ -148,11 +164,11 @@
                 <button type="submit">Elimina</button>
             </div>
         </form>
-
-        <a href="/visualizza_membri/">visualizza membri</a>
-        <ul id="member-list"></ul>
-
-        <h3>Prendi in prestito un libro</h3>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h3>Prendi in prestito</h3>
             <form method="post" action="/form_borrow/">
                 <label for="member">Membro:</label>
                 <select name="member" id="member" required>
@@ -165,7 +181,10 @@
                     <button type="submit">Prendi in prestito</button>
                 </div>
             </form>
-        <h3>Restituisci libro</h3>
+    </td>
+    <td></td>
+    <td>
+        <h3>Restituisci</h3>
             <form method="post" action="/form_return/">
                 <label for="member">Membro:</label>
                 <select name="member" id="member" required>
@@ -178,6 +197,9 @@
                     <button type="submit">Restituisci</button>
                 </div>
             </form>
+    </td>
+</tr>
+        </table>
     </div>
 
 </body>
