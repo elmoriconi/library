@@ -224,16 +224,22 @@ def return_book(request):
     
 def function_books(request):
     if request.method == 'POST':
-        print(request.POST['type'])
         if request.POST['type'] == 'modify':
-            print(request.POST['type'])
             return form_modify_book(request)
         elif request.POST['type'] == 'read':
-            print(request.POST['type'])
             return visualizza_specifica_libro(request)
         elif request.POST['type'] == 'delete':
-            print(request.POST['type'])
             return elimina_libro(request)
+        else:
+            print('Errore')
+        return redirect('/')
+    
+def function_member(request):
+    if request.method == 'POST':
+        if request.POST['type'] == 'modify':
+            return form_modify_member(request)
+        elif request.POST['type'] == 'delete':
+            return elimina_membro(request)
         else:
             print('Errore')
         return redirect('/')

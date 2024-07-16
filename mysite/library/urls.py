@@ -21,5 +21,6 @@ urlpatterns = [
     path('form_modify_member/', views.form_modify_member, name='form_modify_member'),
     path('modify_member/', views.modify_member, name='modify_member'),
     path('elimina_membro/', views.elimina_membro, name='elimina_membro'),
-    path('function_books/', views.function_books, name='function_books')
+    path('function_books/', views.function_books, name='function_books'),
+    path('function_member/', views.function_member, name='function_member')
 ]
