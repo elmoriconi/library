@@ -60,7 +60,7 @@
     </td>
     <td></td>
     <td>
-        <form method="post" action="/form_modify_book/">
+        <form method="post" action="/function_books/">
             <label for="book">Modifica</label>
             <br>
             {% csrf_token %}
@@ -71,7 +71,13 @@
             </select>
             <br><br>
             <div class="form-group">
-                <button type="submit">Modifica</button>
+                <button name="type" value="modify" type="submit">Modifica libro</button>
+            </div>
+            <div class="form-group">
+                <button name="type" value="read" type="submit">Leggi specifiche libro</button>
+            </div>
+            <div class="form-group">
+                <button name="type" value="delete" type="submit">Elimina libro</button>
             </div>
         </form>
 
