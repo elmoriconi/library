@@ -65,7 +65,7 @@
             <br>
             {% csrf_token %}
             <select name="book" id="book" required>
-                {% for libro in libri_modificabili %}
+                {% for libro in libri %}
                 <option value={{ libro.book_id }}>{{ libro.title }}</option>
                 {% endfor %}
             </select>

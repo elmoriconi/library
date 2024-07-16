@@ -25,10 +25,8 @@
             </tr>
         </thead>
         <tbody>
-            <form method="post" action="/function_books/">
-                {% csrf_token %}
-                <select name="book" id="book" required>
             {% for libro in libri %}
+            <form method="post" action="/function_books/">
                 <tr>
                     <td>{{ libro.book_id }}</td>
                     <td>{{ libro.title }}</td>
@@ -36,7 +34,12 @@
                     <td>{{ libro.owned_by.name }}</td>
                     <td>{{ libro.is_borrowed }}</td>
                     <td>{{ libro.borrowed_by }}</td>
-                    <td> <option value={{ libro.book_id }}>{{ libro.title }}</option></td>
+                        <td>
+                        {% csrf_token %}
+                        <select name="book" id="book" required>
+                            <option for="book" value={{ libro.book_id }}>{{ libro.title }}</option>
+                        </select>
+                        </td>
                     <td><div class="form-group">
                         <button name="type" value="modify" type="submit">Modifica</button>
                     </div></td>
@@ -47,9 +50,8 @@
                         <button name="type" value="delete" type="submit">Elimina</button>
                     </div></td>
                 </tr>
-            {% endfor %}
-                </select>
             </form>
+            {% endfor %}
         </tbody>
     </table>
     </body>
