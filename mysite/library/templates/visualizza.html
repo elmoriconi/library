@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Elenco dei Libri</h1>
+    <p>Attenzione: i libri presi in prestito non possono essere modificati o eliminati dal sistema</p>
     <table>
         <thead>
             <tr>
@@ -17,9 +18,16 @@
                 <th>Biblioteca</th>
                 <th>In Prestito</th>
                 <th>In Prestito A</th>
+                <th></th>
+                <th>Modifica</th>
+                <th>Elimina</th>
+                <th>Specifiche</th>
             </tr>
         </thead>
         <tbody>
+            <form method="post" action="/function_books/">
+                {% csrf_token %}
+                <select name="book" id="book" required>
             {% for libro in libri %}
                 <tr>
                     <td>{{ libro.book_id }}</td>
@@ -28,8 +36,20 @@
                     <td>{{ libro.owned_by.name }}</td>
                     <td>{{ libro.is_borrowed }}</td>
                     <td>{{ libro.borrowed_by }}</td>
+                    <td> <option value={{ libro.book_id }}>{{ libro.title }}</option></td>
+                    <td><div class="form-group">
+                        <button name="type" value="modify" type="submit">Modifica</button>
+                    </div></td>
+                    <td><div class="form-group">
+                        <button name="type" value="read" type="submit">Leggi specifiche</button>
+                    </div></td>
+                    <td><div class="form-group">
+                        <button name="type" value="delete" type="submit">Elimina</button>
+                    </div></td>
                 </tr>
             {% endfor %}
+                </select>
+            </form>
         </tbody>
     </table>
     </body>
