@@ -14,14 +14,38 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Biblioteca</th>
+                <th></th>
+                <th>Modifica</th>
+                <th>Elimina</th>
+                <th>Prendi in prestito</th>
+                <th>Restituisci</th>
             </tr>
         </thead>
         <tbody>
             {% for membro in membri %}
+            <form method='post' action='/function_member/'>
                 <tr>
                     <td>{{ membro.member_id }}</td>
                     <td>{{ membro.name }}</td>
                     <td>{{ membro.assigned.name }}</td>
+                    <td>
+                        {% csrf_token %}
+                        <select name='member' id='member' required hidden>
+                            <option for='member' value={{ membro.member_id }}>{{ membro.name }}</option>
+                        </select>
+                    </td>
+                    <td><div class="form-group">
+                        <button name="type" value="modify" type="submit">Modifica</button>
+                    </div></td>
+                    <td><div class="form-group">
+                        <button name="type" value="delete" type="submit">Elimina</button>
+                    </div></td>
+                    <td><div class="form-group">
+                        <button name="type" value="borrow" type="submit">Prendi in prestito</button>
+                    </div></td>
+                    <td><div class="form-group">
+                        <button name="type" value="return" type="submit">Restituisci</button>
+                    </div></td>
                 </tr>
             {% endfor %}
         </tbody>

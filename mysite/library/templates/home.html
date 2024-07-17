@@ -8,9 +8,6 @@
 </head>
 <body>
     <div class="container">
-        <table>
-        <tr>
-            <td>
         <h1>Biblioteche</h1>
         <form method='post' action='create_library/'>
             {% csrf_token %}
@@ -24,11 +21,6 @@
             </div>
         </form>
         <a href="/visualizza_biblioteche/">visualizza biblioteche</a>
-        </td>
-        <td></td>
-        </tr>
-        <tr>
-            <td>
         <h2>Libri</h2>
         <form method="post" action="/inserimento/">
             <label for="library">Biblioteca:</label>
@@ -57,63 +49,6 @@
         </form>
         <a href="/visualizza/">visualizza tutti i libri</a>
         <ul id="book-list"></ul>
-    </td>
-    <td></td>
-    <td>
-        <form method="post" action="/function_books/">
-            <label for="book">Modifica</label>
-            <br>
-            {% csrf_token %}
-            <select name="book" id="book" required>
-                {% for libro in libri %}
-                <option value={{ libro.book_id }}>{{ libro.title }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <div class="form-group">
-                <button name="type" value="modify" type="submit">Modifica libro</button>
-            </div>
-            <div class="form-group">
-                <button name="type" value="read" type="submit">Leggi specifiche</button>
-            </div>
-            <div class="form-group">
-                <button name="type" value="delete" type="submit">Elimina libro</button>
-            </div>
-        </form>
-
-        <form method='post' action='/visualizza_specifica_libro/'>
-            <label for="book">Visualizza specifiche</label>
-            <br>
-            {% csrf_token %}
-            <select name="book" id="book" required>
-                {% for libro in libri %}
-                <option value={{ libro.book_id }}>{{ libro.title }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <div class=form-group>
-                <button type="submit">Visualizza specifiche</button>
-            </div>
-        </form>
-
-        <form method='post' action='/elimina_libro/'>
-            <label for='book'>Elimina</label>
-            <br>
-            {% csrf_token %}
-            <select name="book" id="book" required>
-                {% for libro in libri_modificabili %}
-                <option value={{ libro.book_id }}>{{ libro.title }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <div class=form-group>
-                <button type="submit">Elimina</button>
-            </div>
-        </form>
-    </td>
-</tr>
-        <tr>
-            <td>
         <h2>Members</h2>
         <form method="post" action="/inserimento_membri/">
             <label for="library">Biblioteca:</label>
@@ -138,75 +73,6 @@
         </form>
         <a href="/visualizza_membri/">visualizza membri</a>
         <ul id="member-list"></ul>
-    </td>
-    <td></td>
-    <td>
-        <form method="post" action="/form_modify_member/">
-            <label for='member'>Modifica</label>
-            <br>
-            {% csrf_token %}
-            <select name='member' id='member' required>
-                {% for membro in membri %}
-                <option value={{ membro.member_id }}>{{ membro.name }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <div class="form-group">
-                <button type="submit">Modifica</button>
-            </div>
-        </form>
-
-        <form method="post" action="/elimina_membro/">
-            <label for="member">Elimina</label>
-            <br>
-            {% csrf_token %}
-            <select name="member" id="member">
-                {% for membro in membri%}
-                <option value={{ membro.member_id }}>{{ membro.name }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <div class=form-group>
-                <button type="submit">Elimina</button>
-            </div>
-        </form>
-    </td>
-</tr>
-<tr>
-    <td>
-        <h3>Prendi in prestito</h3>
-            <form method="post" action="/form_borrow/">
-                <label for="member">Membro:</label>
-                <select name="member" id="member" required>
-                    {% for membro in membri %}
-                    <option value={{ membro.member_id }}>{{ membro }}</option>
-                    {% endfor %}
-                </select>
-                {% csrf_token %}
-                <div class="form-group">
-                    <button type="submit">Prendi in prestito</button>
-                </div>
-            </form>
-    </td>
-    <td></td>
-    <td>
-        <h3>Restituisci</h3>
-            <form method="post" action="/form_return/">
-                <label for="member">Membro:</label>
-                <select name="member" id="member" required>
-                    {% for membro in membri %}
-                    <option value={{ membro.member_id }}>{{ membro }}</option>
-                    {% endfor %}
-                </select>
-                {% csrf_token %}
-                <div class="form-group">
-                    <button type="submit">Restituisci</button>
-                </div>
-            </form>
-    </td>
-</tr>
-        </table>
     </div>
-
 </body>
 </html>

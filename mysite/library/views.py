@@ -240,6 +240,10 @@ def function_member(request):
             return form_modify_member(request)
         elif request.POST['type'] == 'delete':
             return elimina_membro(request)
+        elif request.POST['type'] == 'borrow':
+            return form_borrow(request)
+        elif request.POST['type'] == 'return':
+            return form_return(request)
         else:
             print('Errore')
         return redirect('/')
