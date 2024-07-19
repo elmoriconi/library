@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Elenco dei Membri</h1>
+    <p>Attenzione: i membri che hanno libri presi in prestito non possono essere modificati o eliminati dal sistema</p>
     <table>
         <thead>
             <tr>
@@ -30,7 +31,7 @@
                     <td>{{ membro.assigned.name }}</td>
                     <td>
                         {% csrf_token %}
-                        <select name='member' id='member' required hidden>
+                        <select name="member" id="member" required>
                             <option for='member' value={{ membro.member_id }}>{{ membro.name }}</option>
                         </select>
                     </td>
@@ -47,6 +48,7 @@
                         <button name="type" value="return" type="submit">Restituisci</button>
                     </div></td>
                 </tr>
+            </form>
             {% endfor %}
         </tbody>
     </table>

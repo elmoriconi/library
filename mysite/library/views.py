@@ -131,22 +131,11 @@ def visualizza_membri(request):
         print(f"Something has gone wrong\n{e}")
         return redirect('/')
 
-def form_borrow(request):
-    try:
-        if request.method == 'POST':
-            member = request.POST['member']
-            member_istance = Member.objects.get(member_id=member)
-            biblioteca = Library.objects.get(name=member_istance.assigned.name)
-            libri_biblioteca = Book.objects.filter(owned_by=biblioteca.name, is_borrowed=False)
-        return render(request, 'form_borrow.html', {'library': biblioteca, 'member': member_istance, 'books': libri_biblioteca})
-    except Exception as e:
-        print(f"Something has gone wrong\n{e}")
-        return redirect('/')
-
 def form_modify_member(request):
     try:
         if request.method == 'POST':
-            member = Member.objects.get(member_id=request.POST['member'])
+            member = request.POST['member']
+            member = Member.objects.get(member_id=member)
             books = Book.objects.filter(borrowed_by=member)
             if books:
                 return redirect('/')
@@ -154,7 +143,8 @@ def form_modify_member(request):
     except Exception as e:
         print(f"Something has gone wrong\n{e}")
         return redirect('/')
-    
+
+@csrf_exempt
 def modify_member(request):
     try:
         if request.method == 'POST':
@@ -184,6 +174,18 @@ def elimina_membro(request):
         print(f"Something has gone wrong\n{e}")
     finally:
         return redirect('/')
+    
+def form_borrow(request):
+    try:
+        if request.method == 'POST':
+            member = request.POST['member']
+            member_istance = Member.objects.get(member_id=member)
+            biblioteca = Library.objects.get(name=member_istance.assigned.name)
+            libri_biblioteca = Book.objects.filter(owned_by=biblioteca.name, is_borrowed=False)
+        return render(request, 'form_borrow.html', {'library': biblioteca, 'member': member_istance, 'books': libri_biblioteca})
+    except Exception as e:
+        print(f"Something has gone wrong\n{e}")
+        return redirect('/')
 
 def borrow_book(request):
     try:
@@ -209,7 +211,6 @@ def form_return(request):
     except Exception as e:
         print(f"Something has gone wrong\n{e}")
         return redirect('/')
-
 
 def return_book(request):
     try:
