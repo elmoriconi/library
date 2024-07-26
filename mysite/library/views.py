@@ -317,3 +317,9 @@ def function_member(request):
         else:
             print('Errore')
         return redirect('/')
+    
+def home():
+    """
+    Function that redirects you to the home page
+    """
+    return redirect('/')
