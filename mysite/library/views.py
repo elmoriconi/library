@@ -4,13 +4,18 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
 def index(request):
+    """
+    Function that returns the home's html page and the data needed by each function 
+    """
     biblioteche = Library.objects.all()
     libri = Book.objects.all()
     membri = Member.objects.all()
-    libri_modificabili = Book.objects.filter(is_borrowed=False)
-    return render(request, 'home.html', {'biblioteche': biblioteche, 'libri': libri, 'membri': membri, 'libri_modificabili': libri_modificabili})
+    return render(request, 'home.html', {'biblioteche': biblioteche, 'libri': libri, 'membri': membri})
 
 def create_library(request):
+    """
+    Function that creates an object of the class Library with a name as a primary key
+    """
     try:
         if request.method == 'POST':
             library = request.POST['libraryname']
@@ -24,6 +29,9 @@ def create_library(request):
 
 @csrf_exempt
 def inserimento(request):
+    """
+    Function that adds a book into the chosen library. It takes book id (as a primary key), title, author and library as parameters
+    """
     try:
         if request.method == 'POST':
             id_book = request.POST['book-id']
@@ -39,6 +47,10 @@ def inserimento(request):
         return redirect('/')
     
 def form_modify_book(request):
+    """
+    Function that recieves the book id of a book object from input and returns the form to modify the book.
+    If the book is borrowed, the function automatically redirects you to the home page
+    """
     try:
         if request.method == 'POST':
             book = request.POST['book']
@@ -53,6 +65,10 @@ def form_modify_book(request):
 
 @csrf_exempt
 def modify_book(request):
+    """
+    Function that recieves its parameters from the modify book form, controls which attributes have been modified and applies 
+    the changes if they are not None
+    """
     try:
         if request.method == 'POST':
             book = request.POST['book']
@@ -75,6 +91,9 @@ def modify_book(request):
 
 @csrf_exempt
 def inserimento_membri(request):
+    """
+    Function that adds a member into the chosen library. It takes the member id (as a primary key), name and library as parameters
+    """
     try:
         if request.method == 'POST':
             id_member = request.POST['member-id']
@@ -89,6 +108,9 @@ def inserimento_membri(request):
         return redirect('/') 
 
 def visualizza(request):
+    """
+    Function that returns a list of all the books. It includes a form that allows you to use all other book-related functions
+    """
     try:
         libri = Book.objects.all()
         return render(request, 'visualizza.html', {'libri': libri})
@@ -97,6 +119,9 @@ def visualizza(request):
         return redirect('/')
     
 def visualizza_specifica_libro(request):
+    """
+    When passed a book id, the function returns a paragraph with the chosen book's details
+    """
     try:
         if request.method == 'POST':
             return render(request, 'visualizza_specifica_libro.html', {'libro': Book.objects.get(book_id=request.POST['book'])})
@@ -105,6 +130,10 @@ def visualizza_specifica_libro(request):
         return redirect('/')
     
 def elimina_libro(request):
+    """
+    When passed a book id, the function allows you delete a book from the database (unless the book has been borrowed, in which
+    case you will be redirected to the home page)
+    """
     try:
         if request.method == 'POST':
             book_istance = Book.objects.get(book_id=request.POST['book'])
@@ -116,6 +145,9 @@ def elimina_libro(request):
         return redirect('/')
 
 def visualizza_biblioteche(request):
+    """
+    Function that returns a list of all the libraries in the database
+    """
     try:
         biblioteche = Library.objects.all()
         return render(request, 'visualizza_biblioteche.html', {'biblioteche': biblioteche})
@@ -124,6 +156,9 @@ def visualizza_biblioteche(request):
         return redirect('/')
 
 def visualizza_membri(request):
+    """
+    Function that returns a list of all the members. It includes a form that allows you to use all other member-related functions
+    """
     try:
         membri = Member.objects.all()
         return render(request, 'visualizza_membri.html', {'membri': membri})
@@ -132,6 +167,10 @@ def visualizza_membri(request):
         return redirect('/')
 
 def form_modify_member(request):
+    """
+    Function that recieves the member id of a member object from input and returns the form to modify the member.
+    If the member has one or more books in his borrowed books list, the function automatically redirects you to the home page
+    """
     try:
         if request.method == 'POST':
             member = request.POST['member']
@@ -146,6 +185,10 @@ def form_modify_member(request):
 
 @csrf_exempt
 def modify_member(request):
+    """
+    Function that recieves its parameters from the modify member form, controls which attributes have been modified and applies 
+    the changes if they are not None
+    """
     try:
         if request.method == 'POST':
             member = Member.objects.get(member_id=request.POST['member'])
@@ -163,6 +206,10 @@ def modify_member(request):
         return redirect('/')
     
 def elimina_membro(request):
+    """
+    When passed a member id, the function allows you delete a member from the database (unless the member has one or more
+    borrowed books in his borrowed books list, in which case you will be redirected to the home page)
+    """
     try:
         if request.method == 'POST':
             member = Member.objects.get(member_id=request.POST['member'])
@@ -176,6 +223,10 @@ def elimina_membro(request):
         return redirect('/')
     
 def form_borrow(request):
+    """
+    Function that recieves as parameter a member's id. From it, the function obtains the member's library and the books 
+    present in that specific library (unless they have already been borrowed) 
+    """
     try:
         if request.method == 'POST':
             member = request.POST['member']
@@ -188,6 +239,10 @@ def form_borrow(request):
         return redirect('/')
 
 def borrow_book(request):
+    """
+    Function that recieves as parameters a member's id and a book's id. Adds the book to the member's borrowed books list
+    and turns the book's 'is_borrowed' attribute to True
+    """
     try:
         if request.method == 'POST':
             book = request.POST['prestito']
@@ -201,6 +256,10 @@ def borrow_book(request):
         return redirect('/')
 
 def form_return(request):
+    """
+    Function that recieves as parameter a member's id. From it, the function obtains the member's library and the borrowed books list. 
+    Filters out only the books that have been borrowed by that specific member     
+    """
     try:
         if request.method == 'POST':
             member = request.POST['member']
@@ -213,6 +272,10 @@ def form_return(request):
         return redirect('/')
 
 def return_book(request):
+    """
+    Function that recieves as parameter a book's id. Removes the book from the member's borrowed books list
+    and turns the book's 'is_borrowed' attribute to False
+    """
     try:
         if request.method == 'POST':
             book = request.POST['prestito']
@@ -224,6 +287,9 @@ def return_book(request):
         return redirect('/')
     
 def function_books(request):
+    """
+    Ausiliary function used to distinguish which book-related function must be called based on the clicked button
+    """
     if request.method == 'POST':
         if request.POST['type'] == 'modify':
             return form_modify_book(request)
@@ -236,6 +302,9 @@ def function_books(request):
         return redirect('/')
     
 def function_member(request):
+    """
+    Ausiliary function used to distinguish which member-related function must be called based on the clicked button
+    """
     if request.method == 'POST':
         if request.POST['type'] == 'modify':
             return form_modify_member(request)
