@@ -17,6 +17,35 @@ class LibraryTestCase(TestCase):
         self.member_id = "123"
         self.member_name = "Test Member"
         self.member = Member.objects.create(member_id=self.member_id, name=self.member_name, assigned=self.library)
+        
+    def test_index_view(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'home.html')
+        self.assertIn('biblioteche', response.context)
+        self.assertIn('libri', response.context)
+        self.assertIn('membri', response.context)
+        self.assertEqual(len(response.context['biblioteche']), 1)
+        self.assertEqual(len(response.context['libri']), 1)
+        self.assertEqual(len(response.context['membri']), 1)
+
+    def test_create_library_view(self):
+        response = self.client.post(reverse('create_library'), {'libraryname': 'New Library'})
+        self.assertEqual(response.status_code, 302)  # Redirect status code
+        self.assertTrue(Library.objects.filter(name='New_Library').exists())
+
+    @csrf_exempt
+    def test_inserimento_view(self):
+        new_library = Library.objects.create(name="Another_Library")
+        response = self.client.post(reverse('inserimento'), {
+            'book-id': '67890',
+            'book-title': 'Another Book',
+            'book-author': 'Another Author',
+            'library': new_library.name
+        })
+        self.assertEqual(response.status_code, 302)  # Redirect status code
+        self.assertTrue(Book.objects.filter(book_id='67890').exists())
+        self.assertEqual(Book.objects.get(book_id='67890').owned_by, new_library)
 
     def test_form_modify_book(self):
         response = self.client.post(reverse('form_modify_book'), {'book': self.book_id})
