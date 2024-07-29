@@ -14,4 +14,5 @@ Testing done via Unittest, can be found in file test.py .
 **Installation**
 
 Install Django: https://docs.djangoproject.com/en/5.0/topics/install/
+
 Clone repository: git clone https://github.com/elmoriconi/library.git
