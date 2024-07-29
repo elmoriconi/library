@@ -24,7 +24,6 @@ class Book(models.Model):
     author = models.CharField(max_length=100, default = None)
     owned_by = models.ForeignKey(Library, on_delete=models.CASCADE, null=True, related_name='books')
     is_borrowed = models.BooleanField(default=False)
-    is_expired = models.BooleanField(default=False)
     borrowed_by = models.ForeignKey(Member, on_delete=models.DO_NOTHING, null=True, default=None)
 
 
